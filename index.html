@@ -1,0 +1,980 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}
+.blk{scroll-margin-top:5.2rem}
+.toc{margin-top:1.4rem;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:.9rem 1.1rem}
+.toc h4{font-size:1rem;margin-bottom:.5rem}.toc ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.4rem}
+.toc button{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:.15rem .8rem .15rem .25rem;font-size:.9rem;display:flex;gap:.45rem;align-items:center;transition:.2s}
+.toc button b{width:1.5rem;height:1.5rem;border-radius:50%;background:var(--surface2);display:grid;place-items:center;font-size:.8rem}
+.toc button.on{border-color:var(--accent);background:var(--accent-soft)}.toc button.on b{background:var(--accent);color:var(--on-accent)}
+.nextb{margin-top:1.4rem;display:flex;justify-content:flex-end}
+.nextb .btn{font-weight:600;border-color:var(--accent);color:var(--ink);background:var(--accent-soft)}
+.scene{display:grid;gap:.25rem;border-left:4px solid var(--accent);background:var(--surface2);border-radius:10px;padding:.7rem 1rem;margin:.7rem 0;animation:sl .5s both}
+.scene p{font-size:.98rem;line-height:1.75}.lesson{background:var(--warn-soft);border-radius:10px;padding:.8rem 1rem;margin:.7rem 0;animation:sl .5s both}
+@keyframes sl{from{opacity:0;transform:translateX(-18px)}to{opacity:1;transform:none}}
+.pt{border-left:4px solid var(--accent);background:var(--surface2);border-radius:10px;padding:.6rem 1rem;margin:.6rem 0;animation:sl .5s both}
+.tg{margin:.7rem 0}.tg b{display:block;color:var(--accent);margin-bottom:.15rem}
+.tg span{display:inline-block;background:var(--surface2);border:1px solid var(--line);border-radius:8px;padding:0 .7rem;margin:.2rem .3rem .2rem 0;font-size:.92rem;transition:.2s}.tg span:hover{border-color:var(--accent);transform:translateY(-2px)}
+
+.bi>span{display:block}
+.lang{display:flex;margin-left:auto;border:1px solid var(--line);border-radius:999px;overflow:hidden;flex:0 0 auto}.lang button{border:0;background:none;padding:.3rem .8rem;font-size:.92rem;font-weight:600;color:var(--muted)}.lang button.on{background:var(--ink);color:var(--bg)}
+.blk{position:relative}.blk-h{padding-right:6.5rem}.tgl{position:absolute;right:0;top:0;font-weight:600}.blk.closed>.blk-body{display:none}.blk-body{animation:sl .35s both}
+.allc{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.8rem}
+.bx{margin:.9rem 0;padding:.8rem 1rem;background:var(--surface2);border-radius:12px}.bx>b{display:block;color:var(--accent);margin-bottom:.3rem}
+details{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:.4rem .9rem;margin:.4rem 0}summary{cursor:pointer;font-weight:600}details[open]{border-color:var(--accent)}details .bi{margin-top:.3rem}
+.jn{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;margin:1rem 0}.jn button{flex:1;min-width:9rem;border:2px solid var(--line);background:var(--surface);border-radius:12px;padding:.6rem .7rem;text-align:left;transition:.4s;line-height:1.5}
+.jn button small{display:block;color:var(--muted)}.jn button.on{border-color:var(--ink);background:var(--accent-soft);transform:translateY(-5px);box-shadow:0 8px 18px #0002}.jn i{font-style:normal;color:var(--muted)}
+.path{margin:.4rem 0 0;padding-left:1.4rem}.path li{margin:.35rem 0}
+.tabbar>.wrap{display:flex;align-items:center;gap:.6rem}.tabbar .tabs{flex:1;min-width:0}.ctrls{display:flex;gap:.4rem;align-items:center;flex:0 0 auto;padding-block:.3rem}
+.ctrls .lang{margin-left:0}.ctrls .btn{padding:.25rem .8rem;white-space:nowrap}
+@media(max-width:560px){.tabbar>.wrap{flex-wrap:wrap}.tabbar .tabs{flex:1 1 100%}.ctrls{width:100%;justify-content:flex-end}}
+</style></head><body>
+<title>Ultra-X · B2B Software Engineering Guide</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:wght@400;600&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: hero, sticky topic tabs, then one topic panel at a time (idea, animated process, hands-on, company use, 2026 updates). Accent changes per topic: teal (Agile), coral (incidents), indigo (standards). */
+:root{
+  --font-display:'Fraunces',Georgia,serif;
+  --font-body:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --font-mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+  --bg:#ffffff; --surface:#ffffff; --surface2:#e6eff1; --ink:#112a30; --muted:#4a6870; --line:#cbdce0;
+  --agile:#0a7f74; --agile-soft:#d3eeea;
+  --incident:#c93d28; --incident-soft:#fadcd6;
+  --std:#3553c9; --std-soft:#dce3fa;
+  --ok:#1b8a58; --ok-soft:#d5f0e2;
+  --warn:#9a6a10; --warn-soft:#f8ecc9;
+  --on-accent:#ffffff;
+  --accent:var(--agile); --accent-soft:var(--agile-soft);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0b191e; --surface:#11252c; --surface2:#183039; --ink:#e5f0f2; --muted:#94b1b9; --line:#264249;
+    --agile:#43d3c2; --agile-soft:#124240;
+    --incident:#ff8068; --incident-soft:#4b211a;
+    --std:#93a8ff; --std-soft:#222d5c;
+    --ok:#4fd58f; --ok-soft:#14402b;
+    --warn:#e9b94f; --warn-soft:#44350f;
+    --on-accent:#06201d; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0b191e; --surface:#11252c; --surface2:#183039; --ink:#e5f0f2; --muted:#94b1b9; --line:#264249;
+  --agile:#43d3c2; --agile-soft:#124240;
+  --incident:#ff8068; --incident-soft:#4b211a;
+  --std:#93a8ff; --std-soft:#222d5c;
+  --ok:#4fd58f; --ok-soft:#14402b;
+  --warn:#e9b94f; --warn-soft:#44350f;
+  --on-accent:#06201d; color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:1rem;line-height:1.7;padding-block:0 2rem}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--surface)}
+.wrap{max-width:1080px;margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3,h4{font-family:var(--font-display);font-weight:400;line-height:1.35;margin:0;text-wrap:balance}
+h4{font-family:var(--font-body);font-weight:600}
+p{margin:0}
+a{color:var(--accent)}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.kind{font-size:.8rem;font-weight:600;letter-spacing:.05em;color:var(--accent);display:block}
+
+/* hero */
+.hero{background:var(--surface);padding-block:2rem 2.2rem;border-bottom:1px solid var(--line)}
+.hero h1{font-size:clamp(1.9rem,5.2vw,3.1rem);max-width:20ch;margin-block:.5rem 1rem}
+.hero .sub{max-width:62ch;color:var(--muted)}
+.entry{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:.9rem;margin-top:1.6rem}
+.entry button{text-align:left;border:1px solid var(--line);background:var(--accent-soft);border-radius:12px;padding:1rem 1.1rem;display:flex;flex-direction:column;gap:.35rem;transition:transform .2s,border-color .2s}
+.entry button:hover{transform:translateY(-3px);border-color:var(--accent)}
+.entry b{font-family:var(--font-display);font-weight:400;font-size:1.25rem;color:var(--ink)}
+.entry span{font-size:.93rem;color:var(--muted);line-height:1.65}
+.entry [data-t=agile]{--accent:var(--agile);--accent-soft:var(--agile-soft)}
+.entry [data-t=incident]{--accent:var(--incident);--accent-soft:var(--incident-soft)}
+.entry [data-t=standards]{--accent:var(--std);--accent-soft:var(--std-soft)}
+
+/* tabs */
+.tabbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--surface);border-bottom:1px solid var(--line)}
+.tabs{display:flex;gap:.4rem;overflow-x:auto;padding-block:.5rem}
+.tab{flex:0 0 auto;border:1px solid transparent;background:none;border-radius:999px;padding:.35rem 1rem;font-weight:600;font-size:.98rem;color:var(--muted);display:flex;align-items:center;gap:.5rem;white-space:nowrap}
+.tab i{width:.65rem;height:.65rem;border-radius:50%;background:var(--c)}
+.tab[aria-selected=true]{background:var(--ink);color:var(--bg)}
+
+/* panels */
+.panel{padding-block:2rem 1rem}
+.panel[data-topic=agile]{--accent:var(--agile);--accent-soft:var(--agile-soft)}
+.panel[data-topic=incident]{--accent:var(--incident);--accent-soft:var(--incident-soft)}
+.panel[data-topic=standards]{--accent:var(--std);--accent-soft:var(--std-soft)}
+.thead h2{font-size:clamp(1.7rem,4.4vw,2.5rem);margin-block:.3rem .8rem}
+.lead{max-width:68ch;font-size:1.12rem}
+.idea{margin-top:1.1rem;background:var(--accent-soft);border-radius:12px;padding:.9rem 1.1rem;max-width:72ch}
+.blk{margin-top:3rem}
+.blk-h{display:flex;flex-direction:column;gap:.2rem;margin-bottom:.7rem}
+.blk-h h3{font-size:clamp(1.3rem,3vw,1.7rem)}
+.sub{max-width:70ch;color:var(--muted);margin-bottom:1rem}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:1.1rem}
+.btn{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:.3rem 1rem;font-size:.95rem;font-weight:500}
+.btn:hover{border-color:var(--accent)}
+.btn.pri{background:var(--accent);color:var(--on-accent);border-color:var(--accent);font-weight:600}
+.pill{display:inline-block;font-size:.8rem;font-weight:600;padding:.05rem .65rem;border-radius:999px;background:var(--accent-soft);color:var(--ink)}
+
+/* loop */
+.loop svg{width:100%;height:auto;display:block}
+.trk{fill:none;stroke:var(--line);stroke-width:6;stroke-dasharray:2 12;stroke-linecap:round;animation:flow 14s linear infinite}
+@keyframes flow{to{stroke-dashoffset:-140}}
+.ctr{font-family:var(--font-display);font-size:30px;fill:var(--ink)}
+.ctr2{font-size:20px;fill:var(--muted)}
+.st-c{fill:var(--surface);stroke:var(--accent);stroke-width:3.5;transition:fill .3s}
+.st-n{font-size:25px;font-weight:700;fill:var(--ink);text-anchor:middle;dominant-baseline:central;transition:fill .3s}
+.halo{fill:var(--accent);opacity:0;transform-box:fill-box;transform-origin:center}
+.sg.on .st-c{fill:var(--accent)}
+.sg.on .st-n{fill:var(--on-accent)}
+.sg.on .halo{animation:halo 1.8s ease-out infinite}
+@keyframes halo{0%{opacity:.45;transform:scale(1)}100%{opacity:0;transform:scale(1.9)}}
+.tok rect{fill:var(--accent);stroke:var(--surface);stroke-width:3}
+.tok path{stroke:var(--on-accent);stroke-width:3;stroke-linecap:round;fill:none}
+.chips{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:.4rem}
+.chip{display:flex;align-items:center;gap:.4rem;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:.15rem .8rem .15rem .2rem;font-size:.9rem}
+.chip b{width:1.6rem;height:1.6rem;border-radius:50%;background:var(--surface2);display:grid;place-items:center;font-size:.85rem}
+.chip.on{border-color:var(--accent);background:var(--accent-soft)}
+.chip.on b{background:var(--accent);color:var(--on-accent)}
+.cap{margin-top:.9rem;background:var(--accent-soft);border-radius:12px;padding:.9rem 1.1rem;min-height:9.5rem}
+.cap h4{font-size:1.15rem;margin-bottom:.2rem}
+.cap .out{margin-top:.35rem;font-size:.95rem}
+.ctl{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.8rem}
+
+/* story map */
+.smap-wrap{overflow-x:auto}
+.smap{display:grid;grid-template-columns:5.5rem repeat(3,minmax(8.5rem,1fr));gap:.5rem;min-width:36rem;align-items:stretch}
+.smap .h{font-weight:600;font-size:.92rem;padding:.5rem .6rem;background:var(--surface2);border-radius:8px}
+.smap .r{font-weight:600;font-size:.88rem;color:var(--muted);align-self:center}
+.sc{font-size:.88rem;line-height:1.55;padding:.55rem .65rem;border-radius:8px;transition:opacity .5s,transform .5s}
+.sc[data-r="1"]{background:var(--accent);color:var(--on-accent)}
+.sc[data-r="2"]{background:var(--accent-soft)}
+.sc[data-r="3"]{background:var(--surface2)}
+.sc.pre{opacity:0;transform:translateY(-18px) scale(.96)}
+
+/* invest */
+.tabsmini{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.8rem}
+.tabsmini .btn[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.quote{font-size:1.1rem;background:var(--surface2);border-radius:10px;padding:.8rem 1rem;margin-bottom:.9rem}
+.inv{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.5rem}
+.inv button{text-align:left;border:1.5px solid var(--line);background:var(--surface);border-radius:10px;padding:.5rem .7rem;display:flex;gap:.6rem;align-items:flex-start;line-height:1.5;font-size:.9rem}
+.inv button b{font-family:var(--font-mono);font-size:1.15rem;width:1.5rem;color:var(--muted)}
+.inv button small{display:block;color:var(--muted);font-size:.82rem}
+.inv button[aria-pressed=true]{border-color:var(--accent);background:var(--accent-soft)}
+.inv button[aria-pressed=true] b{color:var(--accent)}
+.inv button.right{border-color:var(--ok);background:var(--ok-soft)}
+.inv button.wrong{border-color:var(--incident);background:var(--incident-soft)}
+.res{margin-top:.9rem;display:grid;gap:.45rem}
+.res p{font-size:.95rem;padding:.5rem .8rem;border-radius:8px;background:var(--surface2)}
+.res .score{font-weight:700;background:var(--accent-soft)}
+
+/* code tabs */
+.code{font-family:var(--font-mono),var(--font-body);font-size:.9rem;line-height:1.8;background:var(--surface2);border-radius:10px;padding:.9rem 1rem;white-space:pre-wrap;overflow-x:auto;margin:0}
+.who2{margin-top:.6rem;font-size:.95rem;color:var(--muted)}
+
+/* dod */
+.dod{display:grid;gap:.4rem}
+.dod label{display:flex;gap:.7rem;align-items:center;padding:.45rem .8rem;border-radius:10px;background:var(--surface2);cursor:pointer;transition:background .3s}
+.dod input{width:1.2rem;height:1.2rem;accent-color:var(--accent)}
+.dod label.on{background:var(--accent-soft)}
+.bar{height:.7rem;border-radius:99px;background:var(--surface2);overflow:hidden;margin-top:.8rem}
+.bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .5s}
+.done-badge{margin-top:.6rem;font-weight:700;color:var(--ok);min-height:1.8em}
+
+/* roles */
+.roles{display:grid;gap:.5rem}
+.role{display:grid;grid-template-columns:minmax(8rem,12rem) 1fr;gap:.3rem 1rem;padding:.7rem 1rem;background:var(--surface);border:1px solid var(--line);border-radius:12px}
+.role b{color:var(--accent)}
+.note{margin-top:1rem;background:var(--warn-soft);border-radius:12px;padding:.8rem 1.1rem;max-width:74ch}
+@media (max-width:560px){.role{grid-template-columns:1fr}}
+
+/* updates */
+.upd{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:.8rem}
+.upd article{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:1rem 1.1rem;display:flex;flex-direction:column;gap:.45rem;min-width:0}
+.upd h4{font-size:1.05rem}
+.upd p{font-size:.95rem;line-height:1.7}
+.upd footer{margin-top:auto;font-size:.82rem;color:var(--muted)}
+
+/* bisect */
+.cells{display:grid;grid-template-columns:repeat(auto-fit,minmax(3.1rem,1fr));gap:.4rem;margin-block:.8rem}
+.cell{border:1.5px solid var(--line);background:var(--surface);border-radius:8px;padding:.4rem 0;font-family:var(--font-mono);font-size:.85rem;transition:all .3s}
+.cell.dim{opacity:.35}
+.cell.sug{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.cell.good{background:var(--ok-soft);border-color:var(--ok);opacity:1}
+.cell.bad{background:var(--incident-soft);border-color:var(--incident);opacity:1}
+.cell.pop{animation:pop .45s}
+.cell.cul{background:var(--incident);color:var(--on-accent);border-color:var(--incident);animation:pop .6s}
+@keyframes pop{0%{transform:scale(.7)}60%{transform:scale(1.18)}100%{transform:scale(1)}}
+.gmsg{min-height:3.6em;background:var(--accent-soft);border-radius:10px;padding:.6rem .9rem;font-size:.97rem;line-height:1.7}
+
+/* pillars */
+.pill3{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:.8rem}
+.pill3 .card{display:flex;flex-direction:column;gap:.5rem;min-width:0}
+.mini{height:5.6rem;background:var(--surface2);border-radius:10px;padding:.6rem .7rem;overflow:hidden;font-family:var(--font-mono);font-size:.74rem;line-height:1.7}
+.mini .l{opacity:0;animation:ln 8s infinite;white-space:nowrap}
+.mini .l:nth-child(2){animation-delay:1.2s}.mini .l:nth-child(3){animation-delay:2.4s}.mini .l:nth-child(4){animation-delay:3.6s}
+.l.e{color:var(--incident)}.l.w{color:var(--warn)}
+@keyframes ln{0%,4%{opacity:0;transform:translateX(-8px)}10%,85%{opacity:1;transform:none}100%{opacity:0}}
+.mini svg{width:100%;height:100%;display:block}
+.spark{fill:none;stroke:var(--accent);stroke-width:2.5;stroke-dasharray:420;stroke-dashoffset:420;animation:draw 5s ease-in-out infinite}
+@keyframes draw{0%{stroke-dashoffset:420}60%,90%{stroke-dashoffset:0}100%{stroke-dashoffset:0;opacity:.2}}
+.tr{display:flex;flex-direction:column;gap:.3rem}
+.tr i{display:block;height:.7rem;border-radius:4px;background:var(--accent);transform-origin:left;transform:scaleX(0);animation:wf 5s infinite}
+.tr i:nth-child(1){width:100%}.tr i:nth-child(2){width:70%;margin-left:8%;animation-delay:.4s;opacity:.8}
+.tr i:nth-child(3){width:35%;margin-left:30%;animation-delay:.8s;background:var(--incident)}.tr i:nth-child(4){width:20%;margin-left:12%;animation-delay:1.2s;opacity:.6}
+@keyframes wf{0%{transform:scaleX(0)}25%,85%{transform:scaleX(1)}100%{transform:scaleX(1);opacity:.2}}
+
+/* severity */
+.sev{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.8rem}
+.sev button{border:1.5px solid var(--line);background:var(--surface);border-radius:10px;padding:.3rem 1rem;font-weight:700}
+.sev button[aria-pressed=true]{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+.sevbox{display:grid;gap:.4rem}
+.sevbox div{display:grid;grid-template-columns:7rem 1fr;gap:.8rem;padding:.55rem .8rem;background:var(--surface2);border-radius:8px;font-size:.96rem}
+.sevbox b{color:var(--muted);font-weight:600}
+@media (max-width:520px){.sevbox div{grid-template-columns:1fr;gap:0}}
+
+/* blame */
+.blame{display:grid;gap:.5rem}
+.blame div{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;justify-content:space-between;background:var(--surface2);border-radius:10px;padding:.6rem .9rem}
+.blame p{flex:1 1 16rem;transition:opacity .25s,transform .25s}
+.blame p.sw{opacity:0;transform:translateY(6px)}
+.blame div.good{background:var(--ok-soft)}
+
+/* pipeline */
+.pbar{height:.5rem;border-radius:99px;background:var(--surface2);overflow:hidden;margin-bottom:.8rem}
+.pbar i{display:block;height:100%;width:0;background:var(--accent);transition:width .6s,background .3s}
+.pipe{display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:.55rem;list-style:none;margin:0;padding:0}
+.stg{border:1.5px solid var(--line);border-radius:10px;padding:.55rem .7rem;background:var(--surface);font-size:.9rem;line-height:1.5;transition:all .3s}
+.stg small{display:block;color:var(--muted);font-size:.78rem}
+.stg.active{border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-soft);transform:translateY(-3px)}
+.stg.done{background:var(--ok-soft);border-color:var(--ok)}
+.stg.fail{background:var(--incident-soft);border-color:var(--incident);animation:shake .4s}
+@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.pmsg{margin-top:.9rem;min-height:5.4rem;border-radius:10px;padding:.7rem 1rem;background:var(--surface2)}
+.pmsg.ok{background:var(--ok-soft)}.pmsg.no{background:var(--incident-soft)}
+.pctl{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:.9rem}
+
+/* slo */
+.slo{display:grid;gap:.9rem}
+.slo input[type=range]{width:100%;accent-color:var(--accent)}
+.slov{font-family:var(--font-display);font-size:clamp(1.8rem,5vw,2.6rem)}
+.sgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.6rem}
+.sgrid div{background:var(--surface2);border-radius:10px;padding:.6rem .9rem}
+.sgrid b{display:block;font-size:1.15rem}
+.sbar i{display:block;height:100%;width:50%;background:var(--accent);transition:width .5s}
+
+/* dora */
+.dora{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:.7rem}
+.dora div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:.8rem 1rem}
+.dora b{display:block;color:var(--accent);margin-bottom:.15rem}
+.dora p{font-size:.93rem;line-height:1.65}
+.pillars3{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:.8rem}
+.pillars3 .card ul{margin:.5rem 0 0;padding-left:1.1rem;font-size:.96rem;line-height:1.7}
+.pillars3 h4{font-size:1.1rem;color:var(--accent)}
+
+/* footer */
+.foot{margin-top:3.5rem;border-top:1px solid var(--line);padding-top:1.4rem;font-size:.92rem;color:var(--muted)}
+.foot ul{padding-left:1.1rem;margin:.5rem 0 0}
+.foot li{margin-bottom:.2rem;overflow-wrap:anywhere}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none!important;transition-duration:.01ms!important}
+  .mini .l{opacity:1}.spark{stroke-dashoffset:0}.tr i{transform:none}
+}
+
+/* top navbar + mobile */
+.tabbar{top:env(safe-area-inset-top,0px)}
+.tabbar>.wrap{flex-wrap:nowrap!important;gap:.5rem}
+.tabbar .tabs{flex:1 1 auto!important;min-width:0;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.tabs::-webkit-scrollbar{display:none}
+.ctrls{width:auto!important}
+.hero{padding-block:1.6rem 2rem}
+img,svg,table,pre{max-width:100%}
+body{overflow-wrap:break-word}
+@media(max-width:700px){
+  .wrap{padding-left:max(14px,env(safe-area-inset-left,0px));padding-right:max(14px,env(safe-area-inset-right,0px))}
+  .tab{padding:.3rem .75rem;font-size:.9rem}
+  .tl{display:none}
+  .ctrls .btn{padding:.3rem .65rem}
+  .hero{padding-block:1.2rem 1.5rem}
+  .hero h1{max-width:none}
+  .lead{font-size:1.02rem}
+  .panel{padding-block:1.4rem .5rem}
+  .blk{margin-top:2.2rem}
+  .blk-h{padding-right:4.8rem}
+  .tgl{font-size:.8rem;padding:.2rem .6rem}
+  .card{padding:.85rem}
+  .cap{min-height:0}
+  .nextb{justify-content:stretch}
+  .nextb .btn{width:100%;white-space:normal;text-align:left;border-radius:14px}
+  .ctl .btn,.pctl .btn,.allc .btn{flex:1 1 auto}
+  .toc{padding:.8rem}
+  .toc button{max-width:100%;text-align:left}
+  .jn button{min-width:100%}
+  .jn i{display:none}
+  .code{font-size:.82rem}
+}
+@media(max-width:380px){.tab{font-size:.84rem;padding:.3rem .6rem}}
+</style>
+
+<nav class="tabbar" aria-label="Topics"><div class="wrap"><div class="tabs" role="tablist">
+  <button class="tab" role="tab" id="t-agile" data-t="agile" style="--c:var(--agile)" aria-selected="true"><i></i>1. Agile Requirements</button>
+  <button class="tab" role="tab" id="t-incident" data-t="incident" style="--c:var(--incident)" aria-selected="false"><i></i>2. Incident Investigation</button>
+  <button class="tab" role="tab" id="t-standards" data-t="standards" style="--c:var(--std)" aria-selected="false"><i></i>3. Enterprise Standards</button>
+</div><div class="ctrls"><button class="btn" id="thm"></button></div></div></nav>
+
+<header class="hero"><div class="wrap">
+  <span class="kind" style="--accent:var(--agile)">Ultra-X · B2B Software Engineering Guide</span>
+  <h1>Understand requirements, handle incidents, and run the team on one set of rules</h1>
+  <p class="sub">There are three topics, easiest to read in order 1 to 3. Inside each topic, go from top to bottom: basics, story, animation, hands-on, use at Ultra-X, new ideas, tools and 2026 updates. Every step ends with a "Next step" button.</p>
+  <div class="entry">
+    <button data-go="agile" data-t="agile"><b>1. Agile Requirements</b><span>Even the customer does not know the whole requirement. A way to discover it together with them in small cycles.</span></button>
+    <button data-go="incident" data-t="incident"><b>2. Incident Investigation</b><span>When a system suddenly breaks, find the cause step by step from evidence, not by guessing.</span></button>
+    <button data-go="standards" data-t="standards"><b>3. Enterprise Development Standards</b><span>Keep quality through rules, automation and team culture, not through one ‘hero’.</span></button>
+  </div>
+<section class="blk" id="journey"><div class="blk-h"><span class="kind">Journey</span><h3>Whole-site summary</h3></div>
+<div class="bi">The three topics are three parts of one cycle. First decide what to build (Agile Requirements). Then build it and deliver it to the client in the right way (Enterprise Standards). If something still breaks, find the cause from evidence and fix it (Incident Investigation). What you learn feeds back into the next requirements and rules. Click a step below to jump to that topic.</div>
+<div class="jn" id="jn"></div>
+<h4 style="margin:1.2rem 0 .4rem"><div class="bi">Inside each topic, go in this order</div></h4>
+<ol class="path"><li><div class="bi">Basics: what it is, in simple words</div></li><li><div class="bi">Story: a realistic scenario</div></li><li><div class="bi">Animations and hands-on: learn by doing</div></li><li><div class="bi">Slide explainer and who does what</div></li><li><div class="bi">How to apply at Ultra-X: a 30, 60, 90-day plan</div></li><li><div class="bi">New ideas, tools and 2026 updates</div></li></ol></section></div></header>
+
+
+<main id="main">
+
+<!-- ============ AGILE ============ -->
+<section class="panel" id="p-agile" data-topic="agile" role="tabpanel" aria-labelledby="t-agile"><div class="wrap">
+  <div class="thead">
+    <span class="kind">Topic · Defining requirements</span>
+    <h2>Finding requirements the Agile way</h2>
+    <p class="lead">When you create a new restaurant menu, you first cook one plate, let people taste it, then adjust the spices. If you write the whole menu and serve it three months later, mistakes show up very late. Software requirements work the same way.</p>
+    <p class="idea"><strong>Key idea:</strong> The customer knows their pain point very well, but not clearly what the solution requirement is. So in small cycles you discover the pain and the requirement together.</p>
+  </div>
+
+  <section class="blk"><div class="blk-h"><span class="kind">Basics</span><h3>What are Agile Requirements? (Basics)</h3></div><p class="sub">First understand the core idea. Click on the terms to see simple meanings.</p><div class="card"><div data-m="basics" data-k="agile"></div></div></section>
+<section class="blk"><div class="blk-h"><span class="kind">Story</span><h3>The client asked for a "Dashboard", but the real problem was something else</h3></div><div class="card"><div data-m="story" data-k="agile"></div></div></section>
+<section class="blk">
+    <div class="blk-h"><span class="kind">Animation</span><h3>What happens in one Sprint cycle</h3></div>
+    <p class="sub">The small greenish ‘sticky note’ is a requirement. Watch which steps it passes through before coming back to the start. Click any step to jump there.</p>
+    <div class="card"><div id="loop-agile"></div></div>
+  </section>
+
+  <section class="blk">
+    <div class="blk-h"><span class="kind">Animation</span><h3>User Story map: the whole picture at a glance</h3></div>
+    <p class="sub">Top row: the user’s activities. Below: features by release. Release 1 carries a thin slice of every activity, so the customer can walk the whole path from day one. The example is a factory machine-monitoring dashboard.</p>
+    <div class="card">
+      <div class="smap-wrap"><div class="smap" id="smap">
+        <div></div><div class="h">Viewing machine status</div><div class="h">Getting notified of problems</div><div class="h">Getting reports</div>
+        <div class="r">Release 1</div><div class="sc" data-r="1" data-c="0">Live dashboard</div><div class="sc" data-r="1" data-c="1">Phone alert when temperature passes 80°C</div><div class="sc" data-r="1" data-c="2">Daily PDF report</div>
+        <div class="r">Release 2</div><div class="sc" data-r="2" data-c="0">Per-machine history graph</div><div class="sc" data-r="2" data-c="1">Set alert thresholds yourself</div><div class="sc" data-r="2" data-c="2">Weekly report by email</div>
+        <div class="r">Release 3</div><div class="sc" data-r="3" data-c="0">Early warning before a machine fails</div><div class="sc" data-r="3" data-c="1">Link incidents with repair data</div><div class="sc" data-r="3" data-c="2">Build your own reports</div>
+      </div></div>
+      <div class="ctl"><button class="btn pri" id="smap-play">Replay release by release</button></div>
+    </div>
+  </section>
+
+  <section class="blk">
+    <div class="blk-h"><span class="kind">Hands-on</span><h3>Is the Story good? Check with INVEST</h3></div>
+    <p class="sub">Pick a Story. Mark the letters you think are satisfied, then press ‘Check’.</p>
+    <div class="card">
+      <div class="tabsmini" id="inv-tabs"></div>
+      <p class="quote" id="inv-q"></p>
+      <div class="inv" id="inv-btns"></div>
+      <div class="ctl"><button class="btn pri" id="inv-check">Check</button><button class="btn" id="inv-reset">Clear and retry</button></div>
+      <div class="res" id="inv-res" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <section class="blk">
+    <div class="blk-h"><span class="kind">Hands-on</span><h3>One requirement, written three ways</h3></div>
+    <p class="sub">A requirement is written at three levels. Each has a different reader.</p>
+    <div class="card">
+      <div class="tabsmini" id="fmt-tabs"></div>
+      <pre class="code" id="fmt-code"></pre>
+      <p class="who2" id="fmt-who"></p>
+    </div>
+  </section>
+
+  <section class="blk">
+    <div class="blk-h"><span class="kind">Hands-on</span><h3>Checklist before saying ‘done’ (Definition of Done)</h3></div>
+    <p class="sub">Unless the whole team agrees, ‘Done’ means something different to each person. Tick every box and see what happens.</p>
+    <div class="card">
+      <div class="dod" id="dod"></div>
+      <div class="bar"><i id="dod-bar"></i></div>
+      <p class="done-badge" id="dod-msg" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <section class="blk"><div class="blk-h"><span class="kind">Slide explainer</span><h3>Key Points slide: the 3 columns in detail</h3></div><p class=sub>Each point from the slide’s three columns, written simply. Switching tabs brings the cards in one by one.</p><div class="card"><div data-m="tabs" data-k="agile"></div></div></section>
+<section class="blk">
+    <div class="blk-h"><span class="kind">In the company</span><h3>Who does what</h3></div>
+    <p class="sub">Hypothetical example: our company is building a monitoring dashboard for a factory.</p>
+    <div class="roles">
+      <div class="role"><b>Product Owner</b><span>গ্রাহকের সুপারভাইজারদের সাথে বসে কষ্টের তালিকা বানান। কাজের তালিকা (Backlog) গুরুত্ব অনুযায়ী সাজান। গ্রাহকের হয়ে দলকে ‘কেন’ বুঝিয়ে দেন।</span></div>
+      <div class="role"><b>Developer ও QA</b><span>Story হাতে পেয়ে INVEST দিয়ে যাচাই করেন, অস্পষ্ট জায়গায় প্রশ্ন তোলেন। কোড লেখার আগেই acceptance criteria ঠিক করে নেন। বড় Story ছোট করে ভাঙেন।</span></div>
+      <div class="role"><b>UX ডিজাইনার</b><span>Prototype ও wireframe দেখিয়ে গ্রাহকের প্রত্যাশা মিলিয়ে নেন, যাতে ভুল বোঝাবুঝি কোড লেখার আগেই ধরা পড়ে।</span></div>
+      <div class="role"><b>গ্রাহক (কারখানা)</b><span>প্রতি Sprint Reviewতে চলমান সফটওয়্যার দেখে মত দেন। ফ্লোরের কর্মীরা কী ঝামেলায় পড়ছেন তা সরাসরি জানান।</span></div>
+      <div class="role"><b>Scrum Master ও ম্যানেজার</b><span>Definition of Done সবার সামনে রাখেন। Backlog নিয়মিত পরিষ্কার করান। Requirement বদলালে সেটাকে বিপদ না ভেবে শেখার সুযোগ হিসেবে দেখার সংস্কৃতি গড়েন।</span></div>
+    </div>
+    <p class="note"><strong>B2B-তে বাড়তি খেয়াল:</strong> কারখানার সফটওয়্যার সাধারণত বছরে একবারের মতো আপডেট হয়, কারণ আপডেটের জন্য উৎপাদন থামাতে হয়। তাই প্রতি Sprintের ফল গ্রাহকের চালু লাইনে না দিয়ে ডেমো বা Staging পরিবেশে দেখান। চুক্তিতে স্কোপ বাঁধা থাকলে ‘স্কোপের ভেতরে পরিবর্তন কীভাবে হবে’ সেই নিয়মও লিখে রাখুন।</p>
+  </section>
+<section class="blk"><div class="blk-h"><span class="kind">Ultra-X</span><h3>How to apply this at Ultra-X: a 30, 60, 90-day plan</h3></div><p class=sub>Tick each task. When all tasks of a stage are done, move to the next stage. Examples are written around our products (Battery Health Checkup Tool, Fake Cleaner Detection, UX IoT Sake System, CRM/ERP).</p><div class="card"><div data-m="road" data-k="agile"></div></div></section>
+<section class="blk"><div class="blk-h"><span class="kind">New ideas</span><h3>New ideas for Ultra-X</h3></div><div class="upd" data-m="ideas" data-k="agile"></div></section>
+<section class="blk"><div class="blk-h"><span class="kind">Tools and devices</span><h3>Modern practices, software, devices and tools worth using</h3></div><p class=sub>This list is written from general knowledge. Check the latest status, pricing and licenses before using anything.</p><div class="card"><div data-m="tools" data-k="agile"></div></div></section>
+
+
+  <section class="blk">
+    <div class="blk-h"><span class="kind">2026 updates</span><h3>What is new in the world right now</h3></div>
+    <div class="upd">
+      <article><h4>Spec-driven development</h4><p>When AI agents write the code, a human first writes and approves a clear spec, and only then does the agent build. The steps in GitHub Spec Kit are /specify, /plan, /tasks, /implement. In AWS Kiro, a requirement written in EARS style needs approval before any code appears.</p><footer><a href="https://dev.to/8080_ai/spec-driven-development-in-agile-teams-a-2026-playbook-for-ai-platforms-57km" target="_blank" rel="noopener">Source: dev.to</a></footer></article>
+      <article><h4>Intent in the Backlog, detailed spec in the Sprint</h4><p>A Backlog item holds the intent and rough acceptance criteria. The detailed spec is written inside the Sprint by the person who picks up the work. Writing everything up front leads to "SpecFall", meaning it hardens like waterfall again. Keep the spec changeable.</p><footer><a href="https://dev.to/8080_ai/spec-driven-development-in-agile-teams-a-2026-playbook-for-ai-platforms-57km" target="_blank" rel="noopener">Source: dev.to</a></footer></article>
+      <article><h4>A new line in the Definition of Done</h4><p>In Scrum, the line "spec reviewed and approved" is being added. New columns are appearing on Kanban boards: draft, approved, agent building, human reviewing.</p><footer><a href="https://dev.to/8080_ai/spec-driven-development-in-agile-teams-a-2026-playbook-for-ai-platforms-57km" target="_blank" rel="noopener">Source: dev.to</a></footer></article>
+      <article><h4>AI is an amplifier</h4><p>According to DORA's 2025 survey, about 90% of tech professionals use AI at work. AI amplifies both a team's strengths and its weaknesses. If attention stays on customer needs the benefit grows; if not, the result can backfire. So clarifying requirements is more important than before.</p><footer><a href="https://www.infoq.com/news/2025/09/dora-state-of-ai-in-dev-2025" target="_blank" rel="noopener">Source: InfoQ (DORA 2025)</a></footer></article>
+      <article><h4>Drafts by AI, verification by humans</h4><p>AI is useful for drafting Stories from customer interview notes and for flagging gaps in acceptance criteria. But models can make wrong suggestions, so final approval stays in human hands.</p><footer>Practical experience</footer></article>
+      <article><h4>Validate requirements on live features</h4><p>Open a small feature to a few customers first using a feature flag. See whether they really use it, and decide what comes in the next Sprint. This reduces guesswork and increases data.</p><footer>Practical experience</footer></article>
+    </div>
+  </section>
+</div></section>
+
+<!-- ============ INCIDENT ============ -->
+<section class="panel" id="p-incident" data-topic="incident" role="tabpanel" aria-labelledby="t-incident" hidden><div class="wrap">
+  <div class="thead">
+    <span class="kind">Topic · Incident Investigation</span>
+    <h2>Finding the cause of an incident, step by step</h2>
+    <p class="lead">Before prescribing medicine, a doctor looks at symptoms, runs tests and rules out possibilities one by one. Incident investigation works the same way, not by saying ‘I think it is this’.</p>
+    <p class="idea"><strong>Key idea:</strong> Rare but severe failures need clear test conditions and elimination one step at a time. First stop the damage, then find the cause, then make sure it cannot happen again.</p>
+  </div>
+
+  <section class="blk"><div class="blk-h"><span class="kind">Basics</span><h3>What are Incident Investigation? (Basics)</h3></div><p class="sub">First understand the core idea. Click on the terms to see simple meanings.</p><div class="card"><div data-m="basics" data-k="incident"></div></div></section>
+<section class="blk"><div class="blk-h"><span class="kind">Story</span><h3>Friday 11:40 pm: data drops after a firmware update</h3></div><div class="card"><div data-m="story" data-k="incident"></div></div></section>
+<section class="blk">
+    <div class="blk-h"><span class="kind">Animation</span><h3>The full life cycle of an incident</h3></div>
+    <p class="sub">The reddish note is an incident. From detection it travels all the way to a lesson learned, then returns to the first step to prevent the next incident.</p>
+    <div class="card"><div id="loop-incident"></div></div>
+  </section>
+
+  <section class="blk">
+    <div class="blk-h"><span class="kind">Hands-on</span><h3>Where did the bug get in? Search by halving</h3></div>
+    <p class="sub">The core investigation trick: change or test one thing at a time and eliminate half the possibilities (binary search). Here there are 16 releases. Once the system goes bad at some release, every later one is bad too. We know the last release (16) is bad. Find which release it started at, using as few tests as possible.</p>
+    <div class="card">
+      <div class="ctl" style="margin-top:0"><button class="btn pri" id="bs-auto">Test the middle one</button><button class="btn" id="bs-new">New game</button></div>
+      <div class="cells" id="bs-cells"></div>
+      <p class="gmsg" id="bs-msg" aria-live="polite"></p>
+    </div>
+    <p class="sub" style="margin-top:1rem">In real life, tools like git bisect or switching off feature flags do this. Always remember three steps: 1) Reproduce the problem and check that everyone gets the same result. 2) Change one variable at a time. 3) Combine Logs, Metrics and Traces to confirm the cause with evidence.</p>
+  </section>
+
+  <section class="blk">
+    <div class="blk-h"><span class="kind">Animation</span><h3>Where the evidence lives: Logs, Metrics, Traces</h3></div>
+    <p class="sub">Only by reading all three together do you understand the whole story.</p>
+    <div class="pill3">
+      <div class="card"><h4>Log: what happened</h4><div class="mini" aria-hidden="true"><div class="l">12:01:03 INFO request received</div><div class="l w">12:01:04 WARN database slow</div><div class="l e">12:01:09 ERROR timeout</div><div class="l e">12:01:09 ERROR retry failed</div></div><p>A text record of every event. Specific error messages are found here.</p></div>
+      <div class="card"><h4>Metric: how much, how often</h4><div class="mini" aria-hidden="true"><svg viewBox="0 0 200 60" preserveAspectRatio="none"><polyline class="spark" points="0,48 25,46 50,47 75,44 100,45 120,20 140,8 165,12 200,6"/></svg></div><p>Trends in numbers over time: error rate, latency, CPU. Shows when things started going bad.</p></div>
+      <div class="card"><h4>Trace: where the time went</h4><div class="mini" aria-hidden="true"><div class="tr"><i></i><i></i><i></i><i></i></div></div><p>The path one request took through the services and where it got stuck. The red bar is the suspect.</p></div>
+    </div>
+  </section>
+
+  <section class="blk">
+    <div class="blk-h"><span class="kind">Hands-on</span><h3>What to do depends on the incident Severity</h3></div>
+    <p class="sub">Not all incidents are equally urgent. Once Severity is set, who gets called and how fast is already decided. These are examples; every company and contract (SLA) differs.</p>
+    <div class="card">
+      <div class="sev" id="sev-btns"></div>
+      <div class="sevbox" id="sev-box" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <section class="blk">
+    <div class="blk-h"><span class="kind">Hands-on</span><h3>Post-mortem: process, not blame</h3></div>
+    <p class="sub">Write the post-mortem within 72 hours and share it with the whole team. The question is not ‘who made the mistake’ but ‘which rule would have caught it’. Press the button above each sentence.</p>
+    <div class="card"><div class="blame" id="blame"></div></div>
+    <div class="card" style="margin-top:.8rem"><h4>What to write in a post-mortem</h4>
+      <p style="margin-top:.4rem">Summary · Impact (how many customers, how long) · Timeline · Root cause · What worked well · What went wrong · Action list (each with owner and date) · Final check: after the fix, did the Metric improve?</p></div>
+  </section>
+
+  <section class="blk"><div class="blk-h"><span class="kind">Slide explainer</span><h3>Key Points slide: the 3 columns in detail</h3></div><p class=sub>Each point from the slide’s three columns, written simply. Switching tabs brings the cards in one by one.</p><div class="card"><div data-m="tabs" data-k="incident"></div></div></section>
+<section class="blk">
+    <div class="blk-h"><span class="kind">In the company</span><h3>Who does what during an incident</h3></div>
+    <div class="roles">
+      <div class="role"><b>On-call engineer</b><span>Sees the alert first. Sets the Severity in the first few minutes and calls in more people if needed.</span></div>
+      <div class="role"><b>Incident Commander</b><span>Coordinates and makes decisions. Rather than digging through code personally, keeps track of who is looking at what.</span></div>
+      <div class="role"><b>Subject-matter developer</b><span>Digs through Logs, Metrics and Traces and checks the possibilities one by one.</span></div>
+      <div class="role"><b>Communications lead</b><span>In B2B, keeps the customer regularly updated on the status. A customer left in the dark makes the damage worse.</span></div>
+      <div class="role"><b>Engineering manager</b><span>Makes sure the post-mortem happens and the action items get finished.</span></div>
+    </div>
+    <p class="note"><strong>Extra care in factory-like environments:</strong> You cannot test directly on a live production line, and the boundary between OT (machine control) and IT must also be kept safe. So the Staging environment must be like Production (same infrastructure, network, middleware). Store test data so that a situation can be recreated exactly, and mask real information. Test known failure scenarios in advance with chaos engineering.</p>
+  </section>
+<section class="blk"><div class="blk-h"><span class="kind">Ultra-X</span><h3>How to apply this at Ultra-X: a 30, 60, 90-day plan</h3></div><p class=sub>Tick each task. When all tasks of a stage are done, move to the next stage. Examples are written around our products (Battery Health Checkup Tool, Fake Cleaner Detection, UX IoT Sake System, CRM/ERP).</p><div class="card"><div data-m="road" data-k="incident"></div></div></section>
+<section class="blk"><div class="blk-h"><span class="kind">New ideas</span><h3>New ideas for Ultra-X</h3></div><div class="upd" data-m="ideas" data-k="incident"></div></section>
+<section class="blk"><div class="blk-h"><span class="kind">Tools and devices</span><h3>Modern practices, software, devices and tools worth using</h3></div><p class=sub>This list is written from general knowledge. Check the latest status, pricing and licenses before using anything.</p><div class="card"><div data-m="tools" data-k="incident"></div></div></section>
+
+
+  <section class="blk">
+    <div class="blk-h"><span class="kind">2026 updates</span><h3>What is new in the world right now</h3></div>
+    <div class="upd">
+      <article><h4>AI SRE এজেন্ট</h4><p>Alert এলে এজেন্ট ত্রুটির হার, দেরি, Log, Trace ও সাম্প্রতিক Deploy ঘেঁটে কয়েকটি সম্ভাব্য কারণ প্রমাণসহ On-call চ্যানেলে পাঠায়। প্রতিবেদন অনুযায়ী Wix-এ মাসে ৩০,০০০-এর বেশি Alertে এমন সমৃদ্ধকরণ হয়, মূল কারণ ধরার নির্ভুলতা প্রায় ৯০%।</p><footer><a href="https://clickhouse.com/resources/engineering/ai-sre-agents" target="_blank" rel="noopener">সূত্র: ClickHouse</a></footer></article>
+      <article><h4>AI খোঁজে, মানুষ সিদ্ধান্ত নেয়</h4><p>নতুন ধরনের ব্যর্থতায় বা একাধিক কারণ মিশে থাকলে AI এখনও দুর্বল। ছোট Productionে চলতি নিয়ম হলো ‘প্রস্তাব দেবে, মানুষ অনুমোদন করবে’। নিজে নিজে সিস্টেমে বদল করতে দেওয়া চলতি ভালো অনুশীলন নয়।</p><footer><a href="https://clickhouse.com/resources/engineering/ai-sre-agents" target="_blank" rel="noopener">সূত্র: ClickHouse</a></footer></article>
+      <article><h4>ডেটার মান ঠিক না থাকলে AI-ও অন্ধ</h4><p>Log অল্প সময় রাখলে, বা বেশি ধরনের মান থাকা ফিল্ড বাদ দিয়ে দিলে এজেন্ট কিছু নিশ্চিত করে বলতে পারে না। তদন্তের ভিত্তি তাই ভালো টেলিমেট্রি।</p><footer><a href="https://clickhouse.com/resources/engineering/ai-sre-agents" target="_blank" rel="noopener">সূত্র: ClickHouse</a></footer></article>
+      <article><h4>OpenTelemetry এখন স্ট্যান্ডার্ড</h4><p>২০২৬ সালের মে মাসে OpenTelemetry CNCF-এর graduated মর্যাদা পেয়েছে। Trace, Log ও Metric স্থিতিশীল, আর প্রোফাইলিং নতুন সিগন্যাল হিসেবে যোগ হয়েছে। AI এজেন্টের কাজ পর্যবেক্ষণের জন্য generative AI semantic conventions আর বিনা কোডে সেটআপের (zero-code) জন্য Injector নিয়ে কাজ চলছে।</p><footer><a href="https://opentelemetry.io/blog/2026/otel-grad-now-what/" target="_blank" rel="noopener">সূত্র: OpenTelemetry ব্Log</a></footer></article>
+      <article><h4>AI-র গতি বাড়ে, অস্থিরতাও</h4><p>DORA ২০২৫ বলছে AI ব্যবহারের সাথে ডেলিভারির গতি বেড়েছে, কিন্তু সফটওয়্যার ডেলিভারির অস্থিরতাও বাড়ছে। অর্থাৎ ঘটনা সামলানোর প্রস্তুতি আগের চেয়ে বেশি দরকার।</p><footer><a href="https://www.infoq.com/news/2025/09/dora-state-of-ai-in-dev-2025" target="_blank" rel="noopener">সূত্র: InfoQ (DORA ২০২৫)</a></footer></article>
+      <article><h4>SLO ও error budget</h4><p>আগে থেকে ঠিক করা SLO দিয়ে বোঝা যায় কতটা ব্যর্থতা সহ্য করা যায়। বাজেট প্রায় ফুরিয়ে এলে নতুন ফিচারের চেয়ে স্থিতিশীলতার কাজ আগে ধরার সিদ্ধান্ত নেওয়া সহজ হয়। ক্যালকুলেটরটি ‘স্ট্যান্ডার্ড’ পাতায় আছে।</p><footer>প্রচলিত অনুশীলন</footer></article>
+    </div>
+  </section>
+</div></section>
+
+<!-- ============ STANDARDS ============ -->
+<section class="panel" id="p-standards" data-topic="standards" role="tabpanel" aria-labelledby="t-standards" hidden><div class="wrap">
+  <div class="thead">
+    <span class="kind">Topic · Enterprise Standards</span>
+    <h2>Enterprise Development Standards</h2>
+    <p class="lead">A good hospital runs on rules, checklists and teamwork, not on one superstar doctor. In software teams too, lasting quality comes from process and systems, not individual heroics.</p>
+    <p class="idea"><strong>Key idea:</strong> To keep both quality and speed, hand the rules to machines (automation), watch the state after release (observability), and build a team where people can learn from mistakes.</p>
+  </div>
+
+  <section class="blk"><div class="blk-h"><span class="kind">Basics</span><h3>What are Enterprise Standards? (Basics)</h3></div><p class="sub">First understand the core idea. Click on the terms to see simple meanings.</p><div class="card"><div data-m="basics" data-k="standards"></div></div></section>
+<section class="blk"><div class="blk-h"><span class="kind">Story</span><h3>A library update that never reached the customer</h3></div><div class="card"><div data-m="story" data-k="standards"></div></div></section>
+<section class="blk">
+    <div class="blk-h"><span class="kind">Animation</span><h3>Journey of one commit: the CI/CD pipeline</h3></div>
+    <p class="sub">A change passes eight gates before reaching Production. Pick a scenario and see where it stops.</p>
+    <div class="card">
+      <div class="pctl" id="pctl"></div>
+      <div class="pbar"><i id="pbar"></i></div>
+      <ol class="pipe" id="pipe"></ol>
+      <p class="pmsg" id="pmsg" aria-live="polite">Press a button above to start.</p>
+    </div>
+  </section>
+
+  <section class="blk">
+    <div class="blk-h"><span class="kind">Hands-on</span><h3>How much downtime can an SLO allow?</h3></div>
+    <p class="sub">An SLO is a target agreed with the customer. Move the slider to see how much downtime per month and per year still meets each target. That is the error budget.</p>
+    <div class="card"><div class="slo">
+      <div><label for="slo-r">Availability target</label><input type="range" id="slo-r" min="0" max="5" step="1" value="2"></div>
+      <div class="slov" id="slo-v"></div>
+      <div class="sgrid"><div>Maximum per month (30 days)<b id="slo-m"></b></div><div>Maximum per year<b id="slo-y"></b></div></div>
+      <div class="bar sbar"><i id="slo-bar"></i></div>
+      <p class="sub" style="margin:0" id="slo-t"></p>
+    </div></div>
+  </section>
+
+  <section class="blk">
+    <div class="blk-h"><span class="kind">Three pillars</span><h3>How quality is maintained</h3></div>
+    <div class="pillars3">
+      <div class="card"><h4>CI/CD ও কোডিং স্ট্যান্ডার্ড</h4><ul><li>Git branching পদ্ধতি দলে এক রকম রাখুন, আর সব পরিবর্তনে Code review বাধ্যতামূলক করুন।</li><li>বিল্ড, Test ও Deploy একটি সম্পূর্ণ জোড়া pipelineে স্বয়ংক্রিয় রাখুন।</li><li>নামকরণ ও কোডিং নিয়ম মানুষ নয়, Lint টুল দিয়ে জোর করে মানান।</li></ul></div>
+      <div class="card"><h4>Releaseের পরের স্থিতিশীল অপারেশন</h4><ul><li>Logs, Metrics ও Traces, এই তিন স্তম্ভে সিস্টেমকে দেখার উপযোগী করুন।</li><li>Alertের সীমা ও On-call রোটেশন নকশার অংশ হিসেবে ঠিক করুন।</li><li>Backup ও Disaster Recovery শুধু কাগজে নয়, নিয়মিত চালিয়ে পরীক্ষা করুন।</li></ul></div>
+      <div class="card"><h4>শক্তিশালী ডেভেলপমেন্ট সংগঠন</h4><ul><li>পেয়ার ও মব প্রোগ্রামিং দিয়ে জ্ঞান একজনের মাথায় আটকে থাকা ঠেকান।</li><li>ইন্টারনাল টেক ব্Log ও স্টাডি গ্রুপে শেখা জিনিস সবার সম্পদ বানান।</li><li>মানসিক নিরাপত্তা (psychological safety) গড়ুন, যাতে ব্যর্থতা থেকে ভয় ছাড়া শেখা যায়।</li></ul></div>
+    </div>
+  </section>
+
+  <section class="blk">
+    <div class="blk-h"><span class="kind">Measuring</span><h3>The four DORA metrics</h3></div>
+    <p class="sub">The four most common numbers for judging whether a team is doing well.</p>
+    <div class="dora">
+      <div><b>Deployment frequency</b><p>How often releases go to Production.</p></div>
+      <div><b>Lead time</b><p>How long from commit to Production.</p></div>
+      <div><b>Change failure rate</b><p>What percentage of releases cause problems.</p></div>
+      <div><b>Failed deployment recovery time</b><p>How quickly you recover from a bad release.</p></div>
+    </div>
+    <p class="note">For a factory that releases once a year, low ‘frequency’ is normal. Set separate targets for the customer’s environment and pay more attention to the other three metrics.</p>
+  </section>
+
+  <section class="blk"><div class="blk-h"><span class="kind">Slide explainer</span><h3>Key Points slide: the 3 columns in detail</h3></div><p class=sub>Each point from the slide’s three columns, written simply. Switching tabs brings the cards in one by one.</p><div class="card"><div data-m="tabs" data-k="standards"></div></div></section>
+<section class="blk">
+    <div class="blk-h"><span class="kind">In the company</span><h3>Who does what</h3></div>
+    <div class="roles">
+      <div class="role"><b>Developer</b><span>ছোট ছোট পরিবর্তন করে Pull request দেন। Reviewয়ের জন্য কোড এমনভাবে লেখেন যাতে নিরাপত্তা, পড়ার সুবিধা ও ভবিষ্যতে বাড়ানো সহজ হয়।</span></div>
+      <div class="role"><b>টেক লিড</b><span>কোডিং নিয়ম, Branch পদ্ধতি ও ডিজাইনের কারণ (ADR) ঠিক করেন ও হালনাগাদ রাখেন। নিয়ম বদলালে Lintের কনফিগেও তা তুলে দেন।</span></div>
+      <div class="role"><b>Platform বা DevOps দল</b><span>pipeline, Staging পরিবেশ ও টেমপ্লেট বানান, যাতে নতুন প্রজেক্টও প্রথম দিন থেকে নিয়ম মেনে চলে।</span></div>
+      <div class="role"><b>SRE ও On-call</b><span>Alert, Dashboard ও Backup পরীক্ষা দেখেন। Releaseের পরে সিস্টেম ঠিক চলছে কি না নজরে রাখেন।</span></div>
+      <div class="role"><b>ইঞ্জিনিয়ারিং ম্যানেজার</b><span>পেয়ার প্রোগ্রামিং, স্টাডি গ্রুপ ও দোষমুক্ত আলোচনার সংস্কৃতি চালু রাখেন। Metric দেখে প্রক্রিয়ার উন্নতি খোঁজেন।</span></div>
+    </div>
+  </section>
+<section class="blk"><div class="blk-h"><span class="kind">Ultra-X</span><h3>How to apply this at Ultra-X: a 30, 60, 90-day plan</h3></div><p class=sub>Tick each task. When all tasks of a stage are done, move to the next stage. Examples are written around our products (Battery Health Checkup Tool, Fake Cleaner Detection, UX IoT Sake System, CRM/ERP).</p><div class="card"><div data-m="road" data-k="standards"></div></div></section>
+<section class="blk"><div class="blk-h"><span class="kind">New ideas</span><h3>New ideas for Ultra-X</h3></div><div class="upd" data-m="ideas" data-k="standards"></div></section>
+<section class="blk"><div class="blk-h"><span class="kind">Tools and devices</span><h3>Modern practices, software, devices and tools worth using</h3></div><p class=sub>This list is written from general knowledge. Check the latest status, pricing and licenses before using anything.</p><div class="card"><div data-m="tools" data-k="standards"></div></div></section>
+
+
+  <section class="blk">
+    <div class="blk-h"><span class="kind">2026 updates</span><h3>What is new in the world right now</h3></div>
+    <div class="upd">
+      <article><h4>Platform ইঞ্জিনিয়ারিং ও golden path</h4><p>DORA ২০২৫ অনুযায়ী ৯০% প্রতিষ্ঠান ইন্টারনাল Platform নিয়েছে, আর ৭৬%-এর আলাদা Platform দল আছে। Golden path মানে সাধারণ কাজের জন্য সবচেয়ে সহজ ও সবচেয়ে সমর্থিত রাস্তা। চাইলে অন্য পথে যাওয়া যায়, কিন্তু সহায়তা মেলে এই পথেই।</p><footer><a href="https://www.infoq.com/news/2025/09/dora-state-of-ai-in-dev-2025" target="_blank" rel="noopener">সূত্র: InfoQ (DORA ২০২৫)</a>, <a href="https://roadie.io/blog/platform-engineering-in-2026-why-diy-is-dead/" target="_blank" rel="noopener">Roadie</a></footer></article>
+      <article><h4>Platform দল এখন সাধারণ ব্যাপার</h4><p>Gartner-এর পূর্বাভাস, ২০২৬ সালের মধ্যে বড় সফটওয়্যার প্রতিষ্ঠানের ৮০% এর Platform দল থাকবে, ২০২২ সালে ছিল ৪৫%। Spotify নাকি Backstage চালুর পর নতুন Developerের দশম Pull request পর্যন্ত সময় ৫৫% কমিয়েছে। নিজে বসাতে ৬ থেকে ১২ মাস লাগতে পারে।</p><footer><a href="https://roadie.io/blog/platform-engineering-in-2026-why-diy-is-dead/" target="_blank" rel="noopener">সূত্র: Roadie</a> (প্রকাশকের নিজস্ব ব্যবসায়িক স্বার্থ আছে)</footer></article>
+      <article><h4>AI কোড-সহকারী ও একই গেট</h4><p>DORA-র জরিপে ৮০%-এর বেশি উত্তরদাতা মনে করেন AI তাঁদের উৎপাদনশীলতা বাড়িয়েছে। কিন্তু ডেলিভারির অস্থিরতাও বাড়ছে। তাই AI-র লেখা কোডকেও একই Review, Test ও নিরাপত্তা স্ক্যানের গেট পার হতে হবে।</p><footer><a href="https://www.infoq.com/news/2025/09/dora-state-of-ai-in-dev-2025" target="_blank" rel="noopener">সূত্র: InfoQ (DORA ২০২৫)</a></footer></article>
+      <article><h4>AI-র জন্য প্রস্তুত সংগঠন</h4><p>DORA-র AI capabilities model-এ সাতটি সাংগঠনিক অভ্যাসের কথা আছে, যেমন পরিষ্কার AI নীতি, ভালো ডেটা পরিবেশ, মানসম্পন্ন ইন্টারনাল Platform আর ব্যবহারকারী-কেন্দ্রিক মনোভাব। একক টুল নয়, এগুলোই AI-র সুবিধা বাড়ায়।</p><footer><a href="https://www.infoq.com/news/2025/09/dora-state-of-ai-in-dev-2025" target="_blank" rel="noopener">সূত্র: InfoQ (DORA ২০২৫)</a></footer></article>
+      <article><h4>Platformকে AI-র কাছে খুলে দেওয়া</h4><p>Model Context Protocol (MCP) দিয়ে Platformের ক্ষমতা AI সহকারীর কাছে পৌঁছানো যায়। এর জন্য দরকার ভালো API ডকুমেন্টেশন, সঠিক সফটওয়্যার ক্যাটাLog ও প্রতিষ্ঠিত golden path।</p><footer><a href="https://roadie.io/blog/platform-engineering-in-2026-why-diy-is-dead/" target="_blank" rel="noopener">সূত্র: Roadie</a></footer></article>
+      <article><h4>ঝুঁকির ক্ষতিপূরণ</h4><p>DORA-র গবেষণায় দেখা গেছে উন্নত Platform থাকলে অস্থিরতা সামান্য বাড়ার প্রবণতা আছে। গবেষকরা এটাকে ‘risk compensation’ বলছেন, মানে নিরাপদ লাগলে মানুষ বেশি ঝুঁকি নেয়। তাই গেট আর পর্যবেক্ষণ কমানো চলবে না।</p><footer><a href="https://www.infoq.com/news/2025/09/dora-state-of-ai-in-dev-2025" target="_blank" rel="noopener">সূত্র: InfoQ (DORA ২০২৫)</a></footer></article>
+      <article><h4>সফলতা মাপা: শুধু Deploy নয়</h4><p>Platformের সফলতা মাপতে গ্রহণের হার, ‘হ্যালো ওয়ার্ল্ড’ পর্যন্ত সময়, DORA Metric ও Developerদের সন্তুষ্টি (SPACE) দেখা হয়।</p><footer><a href="https://roadie.io/blog/platform-engineering-in-2026-why-diy-is-dead/" target="_blank" rel="noopener">সূত্র: Roadie</a></footer></article>
+      <article><h4>ডকুমেন্ট কোডের সাথে চলে</h4><p>ডিজাইনের কারণ ADR-এ লিখে রাখুন আর ডকুমেন্টেশন CI pipelineে যোগ করুন যাতে কোডের সাথে মিলে যায়। AI সহকারীরাও এই লেখা পড়ে ভালো সাহায্য করতে পারে।</p><footer>প্রচলিত অনুশীলন</footer></article>
+    </div>
+  </section>
+</div></section>
+</main>
+
+<footer class="wrap"><div class="foot">
+  <p><strong>Sources and caution:</strong> The main structure of this site is based on the B2B Software Engineering Key Points (new-hire orientation) and notes you provided. The 2025–26 facts come from the publications below. Some figures are quoted in those publications from other sources, so confirm with the original source before making decisions.</p>
+  <ul>
+    <li><a href="https://www.infoq.com/news/2025/09/dora-state-of-ai-in-dev-2025" target="_blank" rel="noopener">InfoQ: DORA State of AI-assisted Software Development 2025</a></li>
+    <li><a href="https://clickhouse.com/resources/engineering/ai-sre-agents" target="_blank" rel="noopener">ClickHouse: AI SRE agents</a></li>
+    <li><a href="https://opentelemetry.io/blog/2026/otel-grad-now-what/" target="_blank" rel="noopener">OpenTelemetry: Graduated, now what?</a></li>
+    <li><a href="https://dev.to/8080_ai/spec-driven-development-in-agile-teams-a-2026-playbook-for-ai-platforms-57km" target="_blank" rel="noopener">dev.to: Spec-driven development in agile teams</a></li>
+    <li><a href="https://roadie.io/blog/platform-engineering-in-2026-why-diy-is-dead/" target="_blank" rel="noopener">Roadie: Platform engineering in 2026</a></li>
+  </ul>
+</div></footer>
+
+<script>
+(function(){
+var bn=function(n){return String(n)};
+var $=function(s,r){return (r||document).querySelector(s)};
+var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+var RM=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- tabs ---------- */
+var ids=['agile','incident','standards'];
+var tabs=$$('.tab'), panels=$$('.panel');
+function show(id,scroll){
+  tabs.forEach(function(t){var on=t.dataset.t===id;t.setAttribute('aria-selected',on);t.tabIndex=on?0:-1;if(on&&t.parentNode.scrollTo)t.parentNode.scrollTo({left:Math.max(0,t.offsetLeft-12),behavior:'smooth'})});
+  panels.forEach(function(p){p.hidden=p.id!=='p-'+id});
+  if(scroll){var y=$('#main').offsetTop-$('.tabbar').offsetHeight;window.scrollTo({top:Math.max(0,y),behavior:RM?'auto':'smooth'})}
+}
+tabs.forEach(function(t,i){
+  t.addEventListener('click',function(){show(t.dataset.t,true)});
+  t.addEventListener('keydown',function(e){
+    if(e.key==='ArrowRight'||e.key==='ArrowLeft'){var j=(i+(e.key==='ArrowRight'?1:tabs.length-1))%tabs.length;tabs[j].focus();show(tabs[j].dataset.t,false)}
+  });
+});
+$$('[data-go]').forEach(function(b){b.addEventListener('click',function(){show(b.dataset.go,true)})});
+var h=(location.hash||'').slice(1); show(ids.indexOf(h)>=0?h:'agile',false);
+
+/* ---------- loop animation ---------- */
+var SEG=[
+ {l:620,f:function(u){return [90+620*u,45]}},
+ {l:86.4,f:function(u){var a=(-90+90*u)*Math.PI/180;return [710+55*Math.cos(a),100+55*Math.sin(a)]}},
+ {l:70,f:function(u){return [765,100+70*u]}},
+ {l:86.4,f:function(u){var a=(90*u)*Math.PI/180;return [710+55*Math.cos(a),170+55*Math.sin(a)]}},
+ {l:620,f:function(u){return [710-620*u,225]}},
+ {l:86.4,f:function(u){var a=(90+90*u)*Math.PI/180;return [90+55*Math.cos(a),170+55*Math.sin(a)]}},
+ {l:70,f:function(u){return [35,170-70*u]}},
+ {l:86.4,f:function(u){var a=(180+90*u)*Math.PI/180;return [90+55*Math.cos(a),100+55*Math.sin(a)]}}
+];
+var TOT=SEG.reduce(function(a,s){return a+s.l},0);
+function pointAt(fr){
+  var d=((fr%1)+1)%1*TOT; if(fr>=1) d=TOT-0.001;
+  for(var i=0;i<SEG.length;i++){ if(d<=SEG[i].l){return SEG[i].f(d/SEG[i].l)} d-=SEG[i].l }
+  return SEG[0].f(0);
+}
+var PATH='M90,45 H710 A55,55 0 0 1 765,100 V170 A55,55 0 0 1 710,225 H90 A55,55 0 0 1 35,170 V100 A55,55 0 0 1 90,45 Z';
+function mkLoop(root,cfg){
+  var n=cfg.steps.length, idx=0, cur=0, playing=!RM, timer=null, raf=null;
+  var sts='';
+  for(var k=0;k<n;k++){var p=pointAt(k/n);sts+='<g class="sg" data-k="'+k+'"><circle class="halo" cx="'+p[0]+'" cy="'+p[1]+'" r="28"/><circle class="st-c" cx="'+p[0]+'" cy="'+p[1]+'" r="28"/><text class="st-n" x="'+p[0]+'" y="'+p[1]+'">'+bn(k+1)+'</text></g>'}
+  root.innerHTML='<svg viewBox="0 0 800 270" role="img" aria-label="'+cfg.label+'"><path class="trk" d="'+PATH+'"/><text class="ctr" x="400" y="130" text-anchor="middle">'+cfg.c1+'</text><text class="ctr2" x="400" y="164" text-anchor="middle">'+cfg.c2+'</text>'+sts+'<g class="tok"><rect x="-19" y="-19" width="38" height="38" rx="9"/><path d="M-9-4H9M-9 4H3"/></g></svg><div class="chips"></div><div class="cap" aria-live="polite"></div><div class="ctl"><button class="btn" data-a="prev">Previous Step</button><button class="btn pri" data-a="play"></button><button class="btn" data-a="next">Next Step</button></div>';
+  var tok=$('.tok',root), chips=$('.chips',root), cap=$('.cap',root), pb=$('[data-a=play]',root);
+  cfg.steps.forEach(function(s,i){
+    var b=document.createElement('button');b.className='chip';b.innerHTML='<b>'+bn(i+1)+'</b>'+s.t;
+    b.addEventListener('click',function(){playing=false;upBtn();go(i)});chips.appendChild(b);
+  });
+  var chipEls=$$('.chip',root), sg=$$('.sg',root);
+  function setTok(f){var p=pointAt(f);tok.setAttribute('transform','translate('+p[0]+' '+p[1]+')')}
+  function upBtn(){pb.textContent=playing?'Pause':'Play'}
+  function render(){
+    sg.forEach(function(g,i){g.classList.toggle('on',i===idx)});
+    chipEls.forEach(function(c,i){c.classList.toggle('on',i===idx)});
+    var s=cfg.steps[idx];
+    cap.innerHTML='<h4>'+bn(idx+1)+'. '+s.t+'</h4><p><span class="pill">'+s.who+'</span></p><p style="margin-top:.4rem">'+s.d+'Result: '+s.out+'</p>';
+  }
+  function go(j){
+    clearTimeout(timer); if(raf) cancelAnimationFrame(raf);
+    var from=cur; if(from===0&&j===n-1) from=1;
+    var to=(idx===n-1&&j===0&&Math.abs(from-(n-1)/n)<1e-6)?1:j/n;
+    if(j===0&&from>0.5) to=1;
+    idx=j; render();
+    var dur=RM?0:600+Math.abs(to-from)*1100, t0=null;
+    function step(ts){
+      if(t0===null)t0=ts; var q=dur?Math.min(1,(ts-t0)/dur):1; var e=q<.5?2*q*q:1-Math.pow(-2*q+2,2)/2;
+      cur=from+(to-from)*e; setTok(cur);
+      if(q<1){raf=requestAnimationFrame(step)}else{cur=j/n;setTok(cur);if(playing)timer=setTimeout(function(){go((idx+1)%n)},3000)}
+    }
+    raf=requestAnimationFrame(step);
+  }
+  root.addEventListener('click',function(e){
+    var a=e.target.getAttribute&&e.target.getAttribute('data-a'); if(!a)return;
+    if(a==='play'){playing=!playing;upBtn();if(playing){clearTimeout(timer);timer=setTimeout(function(){go((idx+1)%n)},500)}else{clearTimeout(timer)}}
+    else{playing=false;upBtn();go(a==='next'?(idx+1)%n:(idx+n-1)%n)}
+  });
+  setTok(0);render();upBtn();
+  if(playing)timer=setTimeout(function(){go(1%n)},3000);
+}
+mkLoop($('#loop-agile'),{label:'Five steps of a Sprint cycle',c1:'1–2 week cycle',c2:'Build small, show, learn',steps:[
+ {t:'Sort the Backlog',who:'Product Owner',d:'The customer’s pain points are put on the work list and ordered by priority, top to bottom.',out:'A prioritized list.'},
+ {t:'Sprint planning',who:'Whole team',d:'The few most important Stories are picked. The whole team agrees what ‘Done’ will mean.',out:'The goal of this Sprint and its Definition of Done.'},
+ {t:'Build and verify',who:'Developer and QA',d:'A small feature or prototype is built and tested against the agreed acceptance criteria.',out:'Working, tested software.'},
+ {t:'Sprint Review',who:'Team and customer',d:'The customer sits with the team and sees working software. Feedback comes from the real thing, not a paper description.',out:'The customer’s first reaction and any misunderstandings.'},
+ {t:'Learn from feedback',who:'Product Owner and team',d:'If requirements change, the Backlog is reordered. Change is not a threat, it is new information. The team’s understanding is sharper.',out:'An updated Backlog, the base for the next cycle.'}
+]});
+mkLoop($('#loop-incident'),{label:'The six steps of an incident',c1:'Learning from incidents',c2:'Every incident prevents the next one',steps:[
+ {t:'Detect',who:'On-call engineer',d:'An alert fires or a customer reports it. One person takes ownership of the incident, so that everyone does not assume someone else is looking.',out:'One person in charge of the incident.'},
+ {t:'Set Severity',who:'Incident Commander',d:'How serious the incident is gets decided on a SEV1 to SEV4 scale. That determines who is called and how fast.',out:'The right people at the right speed.'},
+ {t:'Stop the damage',who:'The relevant team',d:'Stop the bleeding first. You can roll back to the previous version or switch off the suspect feature flag. Finding the cause comes later.',out:'The impact on customers has shrunk.'},
+ {t:'Find the cause',who:'Specialist developers',d:'Reproduce the problem, change one variable at a time to halve the possibilities, and gather evidence by combining logs, metrics and traces.',out:'A confirmed root cause backed by evidence.'},
+ {t:'Post-mortem',who:'The whole team',d:'Written and shared with everyone within 72 hours. The discussion is about the process, not about blaming anyone.',out:'Timeline, root cause, action list.'},
+ {t:'Prevention',who:'Manager and team',d:'Finish the action items and check with metrics whether they worked. If not, go back to the post-mortem.',out:'Confidence that the same incident will not happen again.'}
+]});
+
+/* ---------- story map ---------- */
+var scs=$$('#smap .sc');
+function replayMap(){
+  scs.forEach(function(c){c.style.transition='none';c.style.transitionDelay='0s';c.classList.add('pre')});
+  void document.body.offsetWidth;
+  scs.forEach(function(c){c.style.transition='';c.style.transitionDelay=(((+c.dataset.r)-1)*.55+(+c.dataset.c)*.12)+'s';c.classList.remove('pre')});
+}
+$('#smap-play').addEventListener('click',function(){replayMap()});
+
+/* ---------- INVEST ---------- */
+var LET=[['I','Independent','Can be built separately without depending on other Stories'],['N','Negotiable','How to do it is open, what is wanted is clear'],['V','Valuable','The benefit to the customer is clear'],['E','Estimable','You can roughly say how long it will take'],['S','Small','Finishes within one Sprint'],['T','Testable','There is a way to check whether it is done']];
+var STORIES=[
+ {text:'‘The system should be good.’',pass:{I:1,N:1,V:0,E:0,S:0,T:0},why:{V:'It is not clear who benefits or how.',E:'Nobody knows what ‘good’ means, so the time cannot be estimated.',S:'A very large piece of work hides inside vague words.',T:'How would you test whether it is ‘good’?'},better:'Improved version: ‘As a supervisor, I want the machine status page to open within 2 seconds, so that I can quickly pull a report during shift changes.’'},
+ {text:'‘As a plant manager, I want to receive a phone message when a machine temperature goes above 80°C, so that I can act before the machine shuts down.’',pass:{I:1,N:1,V:1,E:1,S:1,T:1},why:{},better:'This Story passes all six. Reason: who, what and why are all present, and a test can be written from ‘80°C’.'},
+ {text:'‘We need to build the dashboard, reports, user management and alerts, all together.’',pass:{I:0,N:1,V:1,E:0,S:0,T:0},why:{I:'Four things are tangled with one another and cannot be released separately.',E:'An estimate for so much at once is bound to be wrong.',S:'It will not finish in one Sprint.',T:'You cannot measure whether ‘all’ is done.'},better:'Improved version: three separate Stories. First only the live dashboard, then alerts, then reports. Each can go out in a separate release.'}
+];
+var si=0, mark={}, checked=false;
+function drawInv(){
+  var tb=$('#inv-tabs');tb.innerHTML='';
+  STORIES.forEach(function(s,i){var b=document.createElement('button');b.className='btn';b.textContent='Story '+bn(i+1);b.setAttribute('aria-pressed',i===si);b.addEventListener('click',function(){si=i;mark={};checked=false;drawInv()});tb.appendChild(b)});
+  $('#inv-q').textContent=STORIES[si].text;
+  var bt=$('#inv-btns');bt.innerHTML='';
+  LET.forEach(function(L){
+    var b=document.createElement('button');b.innerHTML='<b>'+L[0]+'</b><span>'+L[1]+'<small>'+L[2]+'</small></span>';
+    b.setAttribute('aria-pressed',!!mark[L[0]]);
+    if(checked){var ok=!!mark[L[0]]===!!STORIES[si].pass[L[0]];b.classList.add(ok?'right':'wrong');b.disabled=true}
+    b.addEventListener('click',function(){if(checked)return;mark[L[0]]=!mark[L[0]];b.setAttribute('aria-pressed',!!mark[L[0]])});
+    bt.appendChild(b);
+  });
+  $('#inv-res').innerHTML='';
+}
+$('#inv-check').addEventListener('click',function(){
+  checked=true;drawInv();var st=STORIES[si],sc=0,out='';
+  LET.forEach(function(L){var ok=!!mark[L[0]]===!!st.pass[L[0]];if(ok)sc++;if(!st.pass[L[0]]&&st.why[L[0]])out+='<p><b>'+L[0]+' ('+L[1]+'): </b>'+st.why[L[0]]+'</p>'});
+  $('#inv-res').innerHTML='<p class="score">'+bn(6)+'টির মধ্যে '+bn(sc)+'টি মিলেছে।</p>'+out+'<p>'+st.better+'</p>';
+});
+$('#inv-reset').addEventListener('click',function(){mark={};checked=false;drawInv()});
+drawInv();
+
+/* ---------- formats ---------- */
+var FMT=[
+ {k:'User Story',c:'As a plant manager,\nI want to receive a phone message when a machine temperature goes above 80°C,\nso that I can act before the machine shuts down.',w:'Reader: the customer and the Product Owner. It captures who needs what and why.'},
+ {k:'Acceptance criteria (Gherkin)',c:'Scenario: Message when the temperature crosses the limit\n  Given machine M-12 is running\n  And the temperature limit is set to 80°C\n  When the sensor sends 82°C\n  Then the manager receives a message within 30 seconds\n  And the message includes the machine name and temperature',w:'Reader: QA, developers and the customer. An example of "when can we say it is done". The three parts Given, When, Then make the test conditions clear to everyone.'},
+ {k:'Spec (EARS style)',c:'WHEN the sensor temperature exceeds 80°C,\nTHE SYSTEM SHALL send a message to the designated manager,\nincluding the machine name, within 30 seconds.',w:'Reader: developers and AI agents. What to do and when, stated precisely in one sentence. In tools like AWS Kiro, this kind of writing is approved before any code is produced.'}
+];
+var fi=0;
+function drawFmt(){
+  var tb=$('#fmt-tabs');tb.innerHTML='';
+  FMT.forEach(function(f,i){var b=document.createElement('button');b.className='btn';b.textContent=f.k;b.setAttribute('aria-pressed',i===fi);b.addEventListener('click',function(){fi=i;drawFmt()});tb.appendChild(b)});
+  $('#fmt-code').textContent=FMT[fi].c;$('#fmt-who').textContent=FMT[fi].w;
+}
+drawFmt();
+
+/* ---------- DoD ---------- */
+var DOD=['Code review is done','Unit and integration tests pass','Acceptance criteria are met','No major issues in the security scan','Documentation is updated','Demo has been shown to the customer'];
+var dod=$('#dod');
+DOD.forEach(function(t,i){var l=document.createElement('label');l.innerHTML='<input type="checkbox" id="dod'+i+'"> <span>'+t+'</span>';dod.appendChild(l)});
+function upDod(){
+  var cs=$$('input',dod),n=cs.filter(function(c){return c.checked}).length;
+  cs.forEach(function(c){c.parentNode.classList.toggle('on',c.checked)});
+  $('#dod-bar').style.width=(n/DOD.length*100)+'%';
+  $('#dod-msg').textContent=n===DOD.length?'All conditions are met. This Story is truly Done.':(n?bn(n)+' done, '+bn(DOD.length-n)+' remaining. Not Done yet.':'');
+
+}
+dod.addEventListener('change',upDod);upDod();
+
+/* ---------- bisect ---------- */
+var N=16,bad,lo,hi,tests,res,over,bsc=$('#bs-cells');
+function bsNew(){
+  bad=1+Math.floor(Math.random()*N);lo=0;hi=N;tests=0;res={};res[N]=1;over=false;
+  bsDraw(null);$('#bs-msg').textContent='16th Release is broken, it is known. Click any cell or the "Middle One" button to test.';
+}
+function bsDraw(pop){
+  bsc.innerHTML='';
+  var mid=Math.floor((lo+hi)/2);
+  for(var k=1;k<=N;k++){
+    var b=document.createElement('button');b.className='cell';b.textContent='v'+bn(k);
+    var inR=k>lo&&k<=hi;
+    if(res[k]===1)b.classList.add('bad');else if(res[k]===0)b.classList.add('good');
+    else if(!inR)b.classList.add('dim');
+    if(!over&&k===mid&&hi-lo>1&&res[k]===undefined)b.classList.add('sug');
+    if(over&&k===hi)b.classList.add('cul');
+    if(pop===k)b.classList.add('pop');
+    (function(kk){b.addEventListener('click',function(){bsTest(kk)})})(k);
+    bsc.appendChild(b);
+  }
+}
+function bsTest(k){
+  if(over||res[k]!==undefined||!(k>lo&&k<hi))return;
+  tests++;var isBad=k>=bad;res[k]=isBad?1:0;
+  if(isBad)hi=k;else lo=k;
+  if(hi-lo===1){
+    over=true;bsDraw(k);
+    var worst=Math.ceil(Math.log(N)/Math.log(2));
+    $('#bs-msg').textContent='Found it! The bug started with v'+bn(hi)+' or earlier. '+bn(tests)+' tests were needed. If we cut the search space in half each time, for 16 items we would need at most '+bn(worst)+' tests, and for 1024 items, only 10 tests.';
+  }else{
+    bsDraw(k);
+    $('#bs-msg').textContent='v'+bn(k)+(isBad?' is broken, so the bug is v'+bn(k)+' or earlier.':' is good, so the bug is v'+bn(k)+' or later.')+' There are now '+bn(hi-lo)+' possibilities. '+bn(tests)+' tests have been done.';
+  }
+}
+$('#bs-auto').addEventListener('click',function(){if(!over)bsTest(Math.floor((lo+hi)/2))});
+$('#bs-new').addEventListener('click',bsNew);
+bsNew();
+
+/* ---------- severity ---------- */
+var SEV=[
+ {n:'SEV1',a:'Full service down, or production line stopped, or risk of data loss',b:'Respond within 5 minutes. Incident Commander appointed.',c:'Customer updated every 30 minutes',d:'Fastest path for urgent fix, verification, then urgent release. Other work stops.'},
+ {n:'SEV2',a:'Major feature is broken, or many customers are experiencing slow performance',b:'Respond within 15 minutes. Relevant team gets involved.',c:'Updated every hour',d:'Hotfix, thorough testing, then release.'},
+ {n:'SEV3',a:'Minor feature issue, alternative solutions available',b:'Addressed within the same workday.',c:'Daily updates',d:'Fix applied and included in the next regular release cycle.'},
+ {n:'SEV4',a:'Minor issue visible, no impact on work',b:'Considered in the next sprint.',c:'Ticket tracked',d:'Included with regular releases, according to internal SLA.'}
+];
+var sv=0;
+function drawSev(){
+  var b=$('#sev-btns');b.innerHTML='';
+  SEV.forEach(function(s,i){var x=document.createElement('button');x.textContent=s.n;x.setAttribute('aria-pressed',i===sv);x.addEventListener('click',function(){sv=i;drawSev()});b.appendChild(x)});
+  var s=SEV[sv];
+  $('#sev-box').innerHTML='<div><b>Example</b><span>'+s.a+'</span></div><div><b>Response</b><span>'+s.b+'</span></div><div><b>Update</b><span>'+s.c+'</span></div><div><b>Solution Path</b><span>'+s.d+'</span></div>';
+}
+drawSev();
+
+/* ---------- blameless ---------- */
+var BL=[['An engineer entered a wrong config.','There was no rule requiring a second person to review before a config change.'],['The developers did not test properly.','Staging had no test data for this situation, so testing could not have caught it either.'],['The on-call engineer responded late.','The alert went only to email, not to the phone, so nobody saw it at night.']];
+
+var bl=$('#blame');
+BL.forEach(function(p,i){
+  var d=document.createElement('div');d.innerHTML='<p>'+p[0]+'</p><button class="btn" aria-pressed="false">Turn towards the process</button>';
+  var st=false,pp=$('p',d),bt=$('button',d);
+  bt.addEventListener('click',function(){
+    pp.classList.add('sw');
+    setTimeout(function(){st=!st;pp.textContent=p[st?1:0];bt.textContent=st?'Turn back to the previous sentence':'Turn towards the process';d.classList.toggle('good',st);pp.classList.remove('sw')},RM?0:250);
+  });
+  bl.appendChild(d);
+});
+
+/* ---------- pipeline ---------- */
+var STG=[['Commit and PR','Code review is mandatory'],['Lint','Naming and coding rules'],['Test','Unit and integration'],['Security scan','SAST and SCA'],['Build and SBOM','List of components'],['Staging','E2E, like Production'],['Canary','Only 5% of traffic'],['Production','For everyone']];
+var SCN=[
+ {k:'Correct code',f:-1,m:'It passed every gate and reached Production. No human had to do anything by hand along the way, yet a machine stood guard at every gate.'},
+ {k:'Naming mistake',f:1,m:'Stopped at Lint: a naming rule was broken. The reviewer did not have to waste time on it, because the machine flagged it first.'},
+ {k:'Test fails',f:2,m:'Stopped at Test: the boundary value test caught that the message is not sent at exactly 80°C. Bad code never reached Staging.'},
+ {k:'Outdated library',f:3,m:'Stopped at the security scan: a known vulnerability (CVE) was found in a dependency. With an SBOM, you can find within minutes which products contain it.'},
+ {k:'Problem in canary',f:6,m:'Metrics went bad in the canary: the error rate rose on 5% of traffic. It rolled back to the previous version by itself. The remaining customers never noticed anything. For a factory, this could mean trying it on one line first.'}
+];
+var pipe=$('#pipe'),pbar=$('#pbar'),pmsg=$('#pmsg'),run=0,stgEls=[];
+STG.forEach(function(s,i){var li=document.createElement('li');li.className='stg';li.innerHTML=s[0]+'<small>'+s[1]+'</small>';pipe.appendChild(li);stgEls.push(li)});
+var pc=$('#pctl');
+SCN.forEach(function(s,i){var b=document.createElement('button');b.className='btn'+(i===0?' pri':'');b.textContent=s.k;b.addEventListener('click',function(){runPipe(s)});pc.appendChild(b)});
+function sleep(ms){return new Promise(function(r){setTimeout(r,RM?60:ms)})}
+async function runPipe(s){
+  var my=++run;
+  stgEls.forEach(function(e){e.className='stg'});pbar.style.width='0';pbar.style.background='var(--accent)';pmsg.className='pmsg';pmsg.textContent='Running…';
+  for(var i=0;i<STG.length;i++){
+    if(my!==run)return;
+    stgEls[i].classList.add('active');pbar.style.width=((i+.5)/STG.length*100)+'%';
+    await sleep(750);if(my!==run)return;
+    stgEls[i].classList.remove('active');
+    if(s.f===i){stgEls[i].classList.add('fail');pbar.style.background='var(--incident)';pmsg.className='pmsg no';pmsg.textContent=s.m;return}
+    stgEls[i].classList.add('done');pbar.style.width=((i+1)/STG.length*100)+'%';
+  }
+  pmsg.className='pmsg ok';pmsg.textContent=s.m;
+}
+
+/* ---------- SLO ---------- */
+var SL=[99,99.5,99.9,99.95,99.99,99.999];
+function fmtT(sec){
+  var u=[['day',86400],['hour',3600],['minute',60],['second',1]],out=[],r=Math.round(sec);
+  for(var i=0;i<u.length&&out.length<2;i++){var q=Math.floor(r/u[i][1]);if(q>0){out.push(bn(q)+' '+u[i][0]);r-=q*u[i][1]}}
+  return out.length?out.join(' '):'less than a second';
+}
+function upSlo(){
+  var v=SL[+$('#slo-r').value],frac=1-v/100;
+  $('#slo-v').textContent=bn(v)+'%';
+  $('#slo-m').textContent=fmtT(frac*30*86400);
+  $('#slo-y').textContent=fmtT(frac*365*86400);
+  $('#slo-bar').style.width=Math.max(2,frac/0.01*100)+'%';
+  var t=['May be sufficient for small internal tools.','A common target for many business software.','A typical target for customer-facing services. Each additional \'9\' comes with a significant cost and effort.','A challenging target. Hard to maintain without automated recovery.','People don\'t have time to fix it when they wake up. Everything must be automatic.','Extremely costly. Talk to your customers about whether it\'s really necessary.'];
+  $('#slo-t').textContent=t[+$('#slo-r').value]+' The bar below shows the relative size of the budget compared to 99%.';
+}
+$('#slo-r').addEventListener('input',upSlo);upSlo();
+})();
+</script>
+
+<script>
+(function(){
+var $=function(s,r){return(r||document).querySelector(s)},$$=function(s,r){return[].slice.call((r||document).querySelectorAll(s))};
+var bn=function(n){return String(n)};
+
+var D={"agile": {"tabs": [["Agile Requirements Definition", [["Highest-priority first", "In every Sprint, refine, implement and validate the most urgent requirements first. The rest wait in the Backlog."], ["User story mapping", "Arrange the user's activities from left to right, then split Release 1, Release 2 below. Seeing the whole picture shows what is needed first."], ["Definition of Done", "\"Done\" is written down, for example code reviewed, tests passed, docs updated. The whole team shares one definition."]]], ["Continuous Customer Collaboration", [["Sprint reviews", "The customer comes every time, so work never goes in the wrong direction for months."], ["Prototypes & wireframes", "People find it easy to say \"I did not want this\" when they see a picture. It is far cheaper than writing code."], ["Change as learning", "When a requirement changes, do not get annoyed. Understand that the customer's real problem has become clearer."]]], ["Requirements Quality Management", [["INVEST criteria", "Before committing a Story, check that it is Independent, Negotiable, Valuable, Estimable, Small and Testable."], ["Acceptance criteria", "Agree on them with stakeholders before implementation starts, for example in Given-When-Then format."], ["Backlog refinement", "Clean up and re-prioritize the Backlog regularly so it matches the business's current needs."]]]], "tools": [["New practices", "Definition of Ready and Done, Continuous Discovery (weekly user conversations), Outcome-based OKRs, Shape Up-style six-week bets"], ["Planning", "Jira, Linear, Azure DevOps"], ["Design and Story Mapping", "Figma, Miro, FigJam"], ["Analytics and Experiments", "PostHog, Mixpanel, Unleash, LaunchDarkly (feature flag)"], ["AI assistants", "Draft stories and acceptance criteria from meeting notes with Claude or GitHub Copilot, with a human doing the final check"], ["Devices", "CRM/ERP approval (leave approve/reject) on Wear OS or Apple Watch, voice commands"]], "story": {"intro": "Fictional, yet modeled on real-life situations. Click through to view the scenes one by one.", "scenes": [["Monday · Kickoff", "The manager of a Japanese sake brewery said, \"We need a nice dashboard\" Without getting annoyed, the Product Owner asked, \"What was the biggest problem you faced last month?\" The reply: \"At 3:00 AM, the temperature in one of the fermentation tanks went beyond the limit. We only found out in the morning—an entire batch was ruined.\""], ["Same day · Backlog", "So the real pain point is finding out late, not the dashboard. At the top of the Backlog came: \"If a tank's temperature crosses the limit, the supervisor gets a message within 1 minute.\" Acceptance Criteria: Given the temperature stays above the limit for 30 seconds, When the system detects it, Then an SMS and an email are sent."], ["Sprint 1 · Two weeks", "The team built no graphs. They only built sensor data reading and alert sending. Fewer things, but aimed directly at the client's real problem."], ["Sprint Review", "After seeing the demo, the supervisor said, \"The phone is on silent during the night shift. And the limit is not the same every day: it is one value on day 3 of fermentation and another on day 7.\" Nobody knew these two requirements before."], ["Sprint 2", "Two new Stories came in: stage-based limits, and an alert to the next person (escalation) if there is no reply in 5 minutes. The graph moved to Sprint 3."]], "lesson": "If they had written detailed documents for two months, this gap would have been found only after delivery. In short cycles it was found in two weeks. What the client wants and what the client needs are two different things, and the Sprint Review is what exposes that gap."}, "road": [["First 30 days · Build the foundation", ["Appoint one Product Owner per product (Battery Tool, Fake Cleaner Detection, Sake System each separately).", "Write a one-page Definition of Done and put it in the README of every repo (code review, tests pass, docs updated).", "Hold a 30-minute interview with the Sake System client: \"What was the biggest trouble last month?\" Put the answer at the top of the Backlog."]], ["Days 31 to 60 · Start the cycle", ["Start two-week Sprints and demo to the client or stakeholders at the end.", "Use the INVEST checklist and Given-When-Then acceptance criteria before writing Stories.", "Add an in-app feedback button to the Battery Tool: \"Was this report useful?\""]], ["Days 61 to 90 · Make it stick", ["Show UI changes to 10% of users first using a feature flag. If usage does not drop, release to everyone.", "Use AI to draft Stories from interview notes, and have a developer verify them.", "Every quarter, remove unused Stories from the Backlog."]]], "ideas": [["Customer Pain Wall", "In Miro, list the client's pains: whose, when, how often. Check each Sprint which pains went down. Measure pain reduced, not the number of features."], ["Demo Friday", "Every Friday, show working software or a clickable prototype in 20 minutes. Let the Sales and Support teams come too, since they know the client's voice best."], ["Spec-first with AI", "Before writing code, write and get approval for a spec (what, why, acceptance criteria), then build with an AI coding assistant. The spec is the basis for tests."], ["In-app micro feedback", "After a report in Fake Cleaner Detection or the Battery Tool, ask \"Was this useful?\" in one click. Feed it into the weekly Backlog."], ["Smartwatch approval pilot", "View leave requests in CRM/ERP on a watch and approve or reject by voice command. Pilot with a small team first to validate the requirement."]]}, "incident": {"tabs": [["Problem Isolation Procedure", [["Confirm reproducibility", "Write the reproduction steps precisely. Check that everyone on the team gets the same result."], ["Narrow down the cause", "Change one variable at a time. Each step halves the possibilities, for example catching a bug among 16 commits in 4 steps."], ["Data-driven investigation", "Verify your hypothesis by combining logs, metrics and traces. No guessing by sheer force of will."]]], ["Test Environment Readiness", [["Staging like production", "If infrastructure, network and middleware are the same, the problem can be reproduced again in staging."], ["Chaos engineering", "Deliberately inject outages, latency and faults to see in advance whether the system survives."], ["Test data management", "Datasets are versioned so the same state can be recreated again and again, and sensitive data stays masked."]]], ["Post-Mortems & Prevention", [["The 72-hour rule", "Hold and share the post-mortem within 72 hours of a significant incident, while memories are fresh."], ["Process focus", "Ask not \"who made the mistake\" but \"which process failed to stop the mistake\". That way people tell the truth."], ["Verify with metrics", "After taking preventive measures, check with metrics that they really worked."]]]], "tools": [["New practices", "SLOs and Error Budgets, Severity levels, Blameless post-mortems, Game Days (planned disaster drills), Runbooks"], ["Observability", "OpenTelemetry, Grafana, Prometheus, Loki, Datadog"], ["Error tracking", "Sentry (also catches Windows app crashes), Memfault (firmware and devices)"], ["Incident management", "PagerDuty, incident.io, Atlassian Statuspage"], ["Chaos and Network faults", "Toxiproxy, Chaos Mesh, Gremlin"], ["IoT devices and Simulators", "Raspberry Pi, ESP32, MQTT broker (EMQX, Mosquitto), Wokwi simulator, Node-RED"], ["AI assistants", "Use AI for log summaries and hints at possible causes. But mask client data before sending it outside"]], "story": {"intro": "Fictional, but a situation that could really happen with IoT products. Click to see the scenes.", "scenes": [["Fri 23:40 · Alert", "An alert on the on-call engineer's phone: \"Sensor data arrival rate dropped by 40%.\" Within three minutes they declare it SEV2 and call in an Incident Commander and a Communications lead. The first message goes to the client: \"We know about the problem, investigating, next update in 30 minutes.\""], ["23:55 · Stop the damage first", "The first decision, made without knowing the cause: halt the rollout of the newest Firmware v2.4. It had reached 20% of devices by then. The damage was limited only because the rollout was staged. Work begins to roll those devices back to v2.3."], ["00:20 · Finding evidence", "Metrics show the drop only on v2.4 devices. In the logs, \"MQTT reconnect failed: TLS handshake error\" appears again and again. In the traces, every request fails at the broker's authentication step. Combining the three, suspicion turns to the certificate."], ["01:10 · One variable at a time", "On the staging test rig, v2.3 and v2.4 were run side by side. Only after a reboot does v2.4 fail. Then, changing only the device clock: after a reboot the certificate is checked before time sync completes, when the clock is wrong, so TLS fails. The root cause is found."], ["Within three days · Post-mortem", "They looked at the process, not the people. Good: the staged rollout held the damage to 20%. Wrong: the staging devices had never been rebooted, so this case was missing. Action items: add a reboot test, add \"auto-pause if data ingest rate drops\" to the rollout gate, send the client a short report. Each has an owner and a date. A month later, verify with metrics: has the same incident happened again?"]], "lesson": "Stop the damage first, find the cause later. Not guesses, but logs, metrics and traces. One variable at a time. And without a post-mortem, the same incident comes back."}, "road": [["First 30 days · Preparation", ["Write the Severity definitions (SEV1 to SEV4) and set up the on-call roster.", "Decide in advance who will be Incident Commander and who will inform the client.", "Add Device ID and Firmware version to every device log in the Sake System."]], ["Days 31 to 60 · A place to test", ["Build a staging test rack with 2-3 real devices (ESP32 or Raspberry Pi) and test reboots and network drops.", "Make a one-page post-mortem template: timeline, root cause, action items, owner.", "Add crash reporting (for example Sentry) to the Windows tools."]], ["Days 61 to 90 · Habit", ["Run one Game Day each quarter: deliberately cause a network drop, clock drift or broker shutdown and see whether alerts and runbooks work.", "Roll out firmware in stages (5%, 25%, 100%) with auto-pause when data ingest drops.", "Keep a status update template for informing the client."]]], "ideas": [["Fleet Health Heatmap", "A grid of firmware version against error rate. In a new rollout, you can see at a glance which version has the problem."], ["Telemetry Replay", "Record real (masked) telemetry from the client site and replay it in staging. The incident can be recreated exactly."], ["Quarterly Game Day", "Deliberately cause small disasters: a network drop, a wrong clock, a broker shutdown. See how alerts, runbooks and the team respond."], ["AI Triage Assistant", "When an alert arrives, AI reads recent deploys, error rates and logs and proposes three possible causes. It makes no change to the system itself; a human approves."], ["Client-facing Status Page", "Clients can see for themselves what is going on now. In B2B, a client left in the dark is the most furious one."]]}, "standards": {"tabs": [["CI/CD & Coding Standards", [["Git branching + mandatory review", "One branching strategy, and no change is merged unless at least one person has reviewed it."], ["Fully integrated CI/CD", "Build, test and deploy happen in the pipeline, not by hand. Everything starts when you push code."], ["Lint for naming rules", "No arguments over naming and coding rules; the machine catches them itself."]]], ["Stable Operations (Observability)", [["Three pillars", "Logs (what happened), Metrics (how much), Traces (which path it took). Together the three give the full picture."], ["Alerting and on-call", "Design alert thresholds and the on-call rotation in advance as part of the architecture."], ["Backup and DR test", "Saying you have a backup is not enough. Restore regularly and check that it really works."]]], ["Strong Development Organization", [["Pair and mob programming", "Knowledge does not stay stuck with one person (no single point of knowledge failure)."], ["Tech blogs and study groups", "What one person learns becomes an asset of the whole organization."], ["Psychological safety", "No fear when you make a mistake, so people do not hide problems, they learn."]]]], "tools": [["New practices", "Trunk-based development, DORA metrics, Docs-as-code and ADRs, Shift-left security, Platform engineering"], ["CI/CD", "GitHub Actions, GitLab CI"], ["Quality (Lint and Analysis)", "SonarQube, ESLint, Ruff, Clippy (Rust), pre-commit"], ["Security and SBOM", "Dependabot, Renovate, Trivy, Snyk, Syft (SBOM)"], ["Infrastructure", "Docker, Terraform or OpenTofu, Argo CD (GitOps), Backstage (internal developer portal)"], ["IoT Update and Monitoring", "Mender, RAUC (OTA update), Memfault"], ["AI coding assistants", "GitHub Copilot, Claude Code (keeping review and test gates mandatory)"]], "story": {"intro": "Fictional, but modeled on what happens every day in a Windows tool team. Click to see the scenes.", "scenes": [["9:10 am", "Dependabot opens a Pull request: a security vulnerability (CVE) was found in a library of the Battery Health Checkup Tool, so a version update is needed."], ["Five minutes later · Pipeline", "As soon as the Pull request opens, the pipeline runs by itself. Lint passes, unit tests pass, security scan passes."], ["Ten more minutes · Integration test fails", "In this step, tests run with sample battery report files from three different laptop brands. With the new library, parsing one brand's file crashes. Testing by hand would probably have missed this brand."], ["Noon · Fix and Code review", "The developer fixes the problem and adds a test case. As per the rules, another person does the code review, checking security and readability. The change is small, so the review is done in 20 minutes."], ["Afternoon · Merge and Canary", "As soon as it merges, the build runs and the SBOM is generated. The update goes to 5% of users first, and the crash-free rate is watched on the dashboard. If all is well the next morning, it goes to 100%."]], "lesson": "The machine's gates caught the risk, not anyone's heroics. The bug did not reach the customer, and the security patch was not delayed either. This is \"process and systems, not individual heroics\"."}, "road": [["First 30 days · Bring to one standard", ["Build a template repo: lint config, PR template, CODEOWNERS, branch protection.", "Make code review mandatory for every change.", "Turn on Dependabot so library vulnerabilities arrive as PRs automatically."]], ["Days 31 to 60 · Hand it to the machine", ["Pipeline in GitHub Actions: lint, test, security scan, build.", "Generate an SBOM for every release.", "Start measuring the four DORA metrics weekly."]], ["Days 61 to 90 · Culture", ["Keep staged rollout and rollback in IoT firmware OTA updates.", "Start a weekly 45-minute study group or a small internal tech blog.", "Write design decisions as ADRs and add docs to the CI pipeline."]]], "ideas": [["Golden Path", "A new project in one command: template, pipeline, lint and monitoring included. New members follow the rules from day one."], ["DORA Dashboard", "The four metrics weekly. Keep separate targets for IoT firmware and Windows apps, because their release types differ."], ["Firmware Canary and Auto-rollback", "If the crash-free rate or data ingest drops, the update stops by itself and returns to the previous version."], ["Docs-as-code and AI", "ADRs and docs live in the repo. An AI assistant flags outdated or mismatched docs. Code written by AI also passes the same review and test gates."], ["Friday Learning Hour", "Every Friday one person spends 15 minutes on something they learned or the lessons of an incident, and it is written up on the internal blog."]]}};
+D.agile.basics={"one": ["", "Agile Requirements means: instead of writing down everything the client wants up front, you build in small steps (usually 2 weeks each), show the client, and use their feedback to decide the next step."], "why": ["", "Clients know their problem well, but not yet what the solution should look like. If you write a full document and show it three months later, mistakes appear late and cost much more to fix. Showing small steps catches mistakes within a week or two."], "terms": [["Requirement", "", "What the client needs, or the problem that must be solved."], ["User Story", "", "One small need of a user. Template: \"As a ..., I want ..., so that ...\"."], ["Backlog", "", "The list of all work to do, ordered from most to least important."], ["Sprint", "", "A fixed-length work cycle, usually 1 to 2 weeks. At the end you show something that works."], ["Acceptance Criteria", "", "The conditions used to check that a story is really done."], ["Definition of Done", "", "A written checklist of what \"finished\" means, such as tests pass and review is complete."]], "ex": ["", "Say the client asks for \"a nice dashboard\". You ask, \"What is your biggest problem right now?\" They say, \"We only find out in the morning when a machine overheats at night.\" So in Sprint 1 you do not build the dashboard, only an alert for overheating. The client uses it and tells you what else is needed."]};D.incident.basics={"one": ["", "An incident is a problem that is really hurting the client, such as the system being down or data not arriving. Incident investigation means finding the real cause step by step from evidence, instead of changing things at random."], "why": ["", "In rare but serious failures people panic and change many things at random, which can make it worse. A clear method fixes it faster and more safely, and stops it from returning. The right order is: stop the damage first, then find the cause, then prevent it happening again."], "terms": [["Incident", "", "A serious problem that is happening now."], ["Severity", "", "How urgent the problem is. SEV1 is the most serious, so everyone is called in."], ["Root cause", "", "The real reason behind the problem, not just the visible symptom."], ["Logs, Metrics, Traces", "", "Logs say what happened, metrics say how much or how often, traces show the path a request took."], ["Staging", "", "A test environment that mirrors the real system, where you can safely reproduce the problem."], ["Post-mortem", "", "A review after the incident to learn from it. Nobody is blamed; you look at which process failed to catch the mistake."]], "ex": ["", "Device data drops at night. First stop the new update to limit the damage. Then check which version is affected (metrics), what errors appear (logs) and where it gets stuck (traces). Change only one thing at a time while testing. Once you find the cause, fix it. Within three days write a post-mortem and share it with the team."]};D.standards.basics={"one": ["", "Enterprise Development Standards means the whole software team works by the same rules: one Git method, mandatory code review, automatic tests and deployment, and watching the system after release. Good quality comes from rules and systems, not from one person being a hero."], "why": ["", "Enterprise clients keep software for 5 to 10 years. If work stops when one good developer goes on leave or quits, that is a big risk. With standards, even a new person works to the same quality from day one, and machines catch mistakes first."], "terms": [["CI/CD", "", "Automatic build, test and deploy every time code is pushed."], ["Code review", "", "Someone else checks and approves your code before it is merged."], ["Lint", "", "A tool that automatically checks coding and naming rules."], ["Observability", "", "Being able to see what happens inside the system using logs, metrics and traces."], ["On-call", "", "A rota of who responds when something breaks, even at night."], ["SLO", "", "A target agreed with the client, such as being up 99.9% of the time."]], "ex": ["", "A developer makes a small change and opens a pull request. Lint and tests run automatically, a teammate reviews the code, then it is built and deployed. If errors rise on the dashboard after release, an alert goes to the on-call engineer. Even if someone forgot something, the system caught it."]};
+function bi(a){return '<div class="bi">'+a[1]+'</div>'}
+function basics(el,B){el.innerHTML='<div class="bx"><b>In one line</b>'+bi(B.one)+'</div><div class="bx"><b>Why it matters</b>'+bi(B.why)+'</div><div class="bx"><b>Key terms (click to open)</b>'+B.terms.map(function(t){return '<details><summary>'+t[0]+'</summary>'+bi([t[1],t[2]])+'</details>'}).join('')+'</div><div class="bx"><b>Mini example</b>'+bi(B.ex)+'</div>'}
+function story(el,S){
+ el.innerHTML='<p class="sub">'+S.intro+'</p><div class="sl"></div><div class="ctl"><button class="btn pri" data-a="n">Next scene</button><button class="btn" data-a="all">Show all</button><button class="btn" data-a="r">Restart</button></div>';
+ var L=$('.sl',el),n=$('[data-a=n]',el),i=0;
+ function add(){if(i>=S.scenes.length)return;var s=S.scenes[i++],d=document.createElement('div');d.className='scene';d.innerHTML='<span class="pill">'+s[0]+'</span><p>'+s[1]+'</p>';L.appendChild(d);
+  if(i==S.scenes.length){var e=document.createElement('div');e.className='lesson';e.innerHTML='<b>Lesson from the story:</b>  '+S.lesson;L.appendChild(e);n.disabled=true;n.textContent='Story finished'}else n.textContent='Next scene ('+bn(i)+'/'+bn(S.scenes.length)+')'}
+ n.onclick=add;$('[data-a=all]',el).onclick=function(){while(i<S.scenes.length)add()};
+ $('[data-a=r]',el).onclick=function(){L.innerHTML='';i=0;n.disabled=false;n.textContent='Next scene';add()};add()}
+function tabs(el,T){
+ el.innerHTML='<div class="tabsmini"></div><div class="pts"></div>';var tb=$('.tabsmini',el),pt=$('.pts',el);
+ function sh(i){$$('.btn',tb).forEach(function(b,j){b.setAttribute('aria-pressed',i==j)});pt.innerHTML=T[i][1].map(function(x,j){return '<div class="pt" style="animation-delay:'+(j*.25)+'s"><b>'+x[0]+'</b><br>'+x[1]+'</div>'}).join('')}
+ T.forEach(function(t,i){var b=document.createElement('button');b.className='btn';b.textContent=t[0];b.onclick=function(){sh(i)};tb.appendChild(b)});sh(0)}
+function road(el,P){
+ el.innerHTML='<div class="tabsmini"></div><div class="dod"></div><div class="bar"><i></i></div><div class="done-badge"></div>';
+ var tb=$('.tabsmini',el),L=$('.dod',el),st=P.map(function(p){return p[1].map(function(){return false})}),cur=0;
+ function bar(){var t=0,c=0;st.forEach(function(a){a.forEach(function(v){t++;if(v)c++})});$('.bar i',el).style.width=c/t*100+'%';
+  var pd=st[cur].every(Boolean);$('.done-badge',el).textContent=c==t?'The 90-day plan is complete!':pd?'This stage is done! Go to the next stage tab.':bn(c)+'/'+bn(t)+'  tasks done'}
+ function draw(){$$('.btn',tb).forEach(function(b,j){b.setAttribute('aria-pressed',j==cur)});L.innerHTML='';
+  P[cur][1].forEach(function(t,j){var l=document.createElement('label'),c=document.createElement('input');c.type='checkbox';c.checked=st[cur][j];l.className=c.checked?'on':'';
+   c.onchange=function(){st[cur][j]=c.checked;l.className=c.checked?'on':'';bar()};l.appendChild(c);l.appendChild(document.createTextNode(t));L.appendChild(l)});bar()}
+ P.forEach(function(p,i){var b=document.createElement('button');b.className='btn';b.textContent=p[0];b.onclick=function(){cur=i;draw()};tb.appendChild(b)});draw()}
+function ideas(el,I){el.innerHTML=I.map(function(x){return '<article><h4>'+x[0]+'</h4><p>'+x[1]+'New idea'}).join('')}
+function tools(el,T){el.innerHTML=T.map(function(t){return '<div class="tg"><b>'+t[0]+'</b>'+t[1].split(/, (?![^(]*\))/).map(function(x){return '<span>'+x+'</span>'}).join('')+'</div>'}).join('')}
+var F={basics:basics,story:story,tabs:tabs,road:road,ideas:ideas,tools:tools},K={basics:'basics',story:'story',tabs:'tabs',road:'road',ideas:'ideas',tools:'tools'};
+$$('[data-m]').forEach(function(e){F[e.dataset.m](e,D[e.dataset.k][K[e.dataset.m]])});
+/* navigation: numbered steps, table of contents, next buttons */
+var names={agile:'Agile Requirements',incident:'Incident Investigation',standards:'Enterprise Standards'},order=['agile','incident','standards'];
+order.forEach(function(k,pi){
+ var P=$('#p-'+k),B=$$('.blk',P),L=document.createElement('nav');L.className='toc';L.setAttribute('aria-label','Stage list');
+ L.innerHTML='<h4>This topic has  '+bn(B.length)+' steps. Read them in order from top to bottom, or jump straight to any one:</h4><ol></ol>';var ol=$('ol',L);
+ B.forEach(function(b,i){b.id=k+'-s'+(i+1);var kd=$('.kind',b),ti=$('h3',b).textContent;kd.textContent='Step  '+bn(i+1)+'/'+bn(B.length)+' · '+kd.textContent;
+  var li=document.createElement('li'),bt=document.createElement('button');bt.innerHTML='<b>'+bn(i+1)+'</b>'+$('.kind',b).textContent.split(' · ')[1];bt.title=ti;bt.onclick=function(){b.scrollIntoView({behavior:'smooth'})};li.appendChild(bt);ol.appendChild(li);
+  var nx=document.createElement('div');nx.className='nextb';var nb=document.createElement('button');nb.className='btn';
+  if(i<B.length-1){nb.textContent='Next step ↓  '+$('h3',B[i+1]).textContent;nb.onclick=function(){B[i+1].scrollIntoView({behavior:'smooth'})}}
+  else if(pi<2){nb.textContent='Next topic →  '+names[order[pi+1]];nb.onclick=function(){$('#t-'+order[pi+1]).click()}}
+  else{nb.textContent='Back to the top ↑';nb.onclick=function(){scrollTo({top:0,behavior:'smooth'})}}
+  nx.appendChild(nb);b.appendChild(nx)});
+ $('.thead',P).appendChild(L);
+ if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var n=B.indexOf(e.target);$$('button',ol).forEach(function(x,j){x.classList.toggle('on',j==n)})}})},{rootMargin:'-30% 0px -60% 0px'});B.forEach(function(b){io.observe(b)})}});
+var th=$('#thm'),R=document.documentElement;
+function sT(m){R.dataset.theme=m;th.innerHTML=m=='dark'?'☀ <span class="tl">Light</span>':'☾ <span class="tl">Dark</span>'}
+sT(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');th.onclick=function(){sT(R.dataset.theme=='dark'?'light':'dark')};
+})();
+</script>
+<script>
+(function(){
+var $$=function(s,r){return[].slice.call((r||document).querySelectorAll(s))};
+var R=document.documentElement;
+/* language */
+function sL(l){R.dataset.lang=l;$$('.blk').forEach(function(b){setOpen(b,!b.classList.contains('closed'))});$$('.lang button').forEach(function(b){b.classList.toggle('on',b.dataset.l==l)})}
+$$('.lang button').forEach(function(b){b.onclick=function(){sL(b.dataset.l)}});sL('en');
+/* collapsible sections */
+function lbl(on){var en=R.dataset.lang=='en';return on?(en?'▾ Hide':'▾ Hide'):(en?'▸ Show':'▸ Show')}
+function setOpen(b,on){b.classList.toggle('closed',!on);var t=b.querySelector(':scope > .blk-h > .tgl');if(t){t.setAttribute('aria-expanded',on);t.textContent=lbl(on)}}
+var osv=Element.prototype.scrollIntoView;
+Element.prototype.scrollIntoView=function(o){var b=this.closest&&this.closest('.blk');if(b&&b.classList.contains('closed'))setOpen(b,true);return osv.call(this,o)};
+$$('.blk').forEach(function(b){var h=b.querySelector(':scope > .blk-h'),body=document.createElement('div');body.className='blk-body';
+ while(h.nextSibling)body.appendChild(h.nextSibling);b.appendChild(body);
+ var t=document.createElement('button');t.className='btn tgl';h.appendChild(t);t.onclick=function(){setOpen(b,b.classList.contains('closed'))};setOpen(b,true)});
+$$('.panel').forEach(function(P){var c=document.createElement('div');c.className='allc';
+ c.innerHTML='<button class="btn" data-o="1">Open all steps</button><button class="btn" data-o="0">Close all steps</button>';
+ c.onclick=function(e){var o=e.target.dataset.o;if(o==null)return;$$('.blk',P).forEach(function(b){setOpen(b,o=='1')})};
+ var th=P.querySelector('.thead');th.appendChild(c)});
+/* journey cycle */
+var N=[['Define requirements','Define requirements','agile'],['Build and release by standards','Build and release by standards','standards'],['Monitor the system','Monitor the system','standards'],['Investigate incidents','Investigate incidents','incident'],['Learn from the post-mortem','Learn, then feed back','incident']],J=document.getElementById('jn'),c=0;
+J.innerHTML=N.map(function(n,i){return '<button data-i="'+i+'"><b>'+(i+1)+'. '+n[1]+'</b></button>'+(i<4?'<i>›</i>':'<i>↺</i>')}).join('');
+var bt=$$('button',J);function lt(){bt.forEach(function(b,i){b.classList.toggle('on',i==c)})}lt();
+var iv=setInterval(function(){c=(c+1)%5;lt()},2200);
+bt.forEach(function(b,i){b.onclick=function(){c=i;lt();document.getElementById('t-'+N[i][2]).click()}});
+})();
+</script>
+</body></html>
